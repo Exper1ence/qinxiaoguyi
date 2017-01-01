@@ -1,4 +1,8 @@
 {
-  "name": "application-name",
-  "version": "0.0.1"
+  "name": "qinxiaoguyi",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
 }
