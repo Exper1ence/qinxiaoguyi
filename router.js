@@ -24,7 +24,7 @@ module.exports = {
         app.use(bodyParser.json());
         app.use(router);
         app.listen(port, () => {
-            console.log(`server is listening at ${port}.`);
+            console.log(`server is listening at ${ process.env.PORT || port}.`);
         });
     },
 };
