@@ -8,7 +8,7 @@ import {
     Wrapper, Padding, Text, Responsive,
     Button, Navigator, View, Footer,
     Link,
-} from './newCom';
+} from './components';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
 class MathRobot extends Component {
@@ -36,10 +36,24 @@ class MathRobot extends Component {
 class Content extends Component {
     run() {
         return (
-            <Container style={{
-                backgroundColor: '#563D7C',
-                flexGrow: 1,
-            }}>
+            <Container
+                style={{
+                    backgroundColor: '#563D7C',
+                    flexGrow: 1,
+                }}
+                onTouchCancel={()=>{
+                    console.log('cancel');
+                }}
+                onTouchStart={()=>{
+                    console.log('start');
+                }}
+                onTouchEnd={()=>{
+                    console.log('end');
+                }}
+                onTouchMove={()=>{
+                    console.log('move');
+                }}
+            >
                 asdasdas
             </Container>
         )

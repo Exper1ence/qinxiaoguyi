@@ -14,7 +14,12 @@ class Container extends Component {
         super(props);
     }
     
-    run({children, style, col, offset, push, pull, hidden, fixed, fluid,}) {
+    run({
+        children, style, col, offset,
+        push, pull, hidden, fixed, fluid,
+        onTouchCancel, onTouchStart, onTouchEnd,
+        onTouchMove,
+    }) {
         if (fixed || !fluid) {
             return (
                 <Responsive
@@ -61,21 +66,12 @@ class Container extends Component {
                                     display,
                                     ...style,
                                 }}
-                                onTouchCancel={() => {
-                                    alert('cancel');
-                                }}
-                                onTouchEnd={() => {
-                                    alert('end');
-                                }}
-                                onTouchMove={() => {
-                                    alert('move');
-                                }}
-                                onTouchStart={() => {
-                                    alert('start');
-                                }}
-                            >
-                                {children}
-                            </View>
+                                children={children}
+                                onTouchCancel={onTouchCancel}
+                                onTouchStart={onTouchStart}
+                                onTouchEnd={onTouchEnd}
+                                onTouchMove={onTouchMove}
+                            />
                         )
                     }}
                 />
