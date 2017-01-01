@@ -21,10 +21,11 @@ module.exports = {
         app.use(Express.static(path));
     },
     start(port){
+        port = process.env.PORT || port;
         app.use(bodyParser.json());
         app.use(router);
         app.listen(port, () => {
-            console.log(`server is listening at ${ process.env.PORT || port}.`);
+            console.log(`server is listening at ${ port}.`);
         });
     },
 };
