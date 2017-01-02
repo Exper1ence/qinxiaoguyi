@@ -54,7 +54,7 @@ class Content extends Component {
             return (
                 <Container
                     style={{
-                        height: '100%',
+                        color:'#fff',
                         backgroundColor: '#563D7C',
                     }}
                     onDragVertical={(e, diff) => {
@@ -70,6 +70,7 @@ class Content extends Component {
                         const {time}=this.attrs;
                         this.setState({bottom: 0, transition: `bottom ${time}s`});
                     }}
+                    children={'aaaaaaaaaaaaaaaa'}
                 />
             )
         }
