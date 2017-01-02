@@ -119,9 +119,13 @@
 	    _createClass(Content, [{
 	        key: 'init',
 	        value: function init() {
+	            this.attrs = {
+	                isMoving: false,
+	                time: .3
+	            };
 	            return {
-	                top: 0,
-	                transition: 0
+	                bottom: 0,
+	                transition: ''
 	            };
 	        }
 	    }, {
@@ -129,7 +133,7 @@
 	        value: function run(_ref2, _ref3) {
 	            var _this3 = this;
 
-	            var top = _ref3.top,
+	            var bottom = _ref3.bottom,
 	                transition = _ref3.transition;
 
 	            _objectDestructuringEmpty(_ref2);
@@ -141,14 +145,23 @@
 	                        height: '100%',
 	                        backgroundColor: '#563D7C',
 	                        position: 'absolute',
-	                        top: top,
+	                        bottom: bottom,
 	                        transition: transition
 	                    },
 	                    onDragVertical: function onDragVertical(e, diff) {
-	                        _this3.setState({ top: diff + 'px', transition: 0 });
+	                        var offset = Math.max(0, -diff);
+	                        _this3.setState({ bottom: offset + 'px', transition: '' });
+	                        if (offset == 0) return e.targetTouches[0];
 	                    },
 	                    onSwipeUp: function onSwipeUp() {
-	                        _this3.setState({ top: '-100%', transition: 'top .2s' });
+	                        var time = _this3.attrs.time;
+
+	                        _this3.setState({ bottom: '100%', transition: 'bottom ' + time + 's' });
+	                    },
+	                    onSwipeDown: function onSwipeDown() {
+	                        var time = _this3.attrs.time;
+
+	                        _this3.setState({ bottom: 0, transition: 'bottom ' + time + 's' });
 	                    }
 	                },
 	                'asdasdas'
@@ -21754,8 +21767,8 @@
 	    var dirX = end.clientX - start.clientX;
 	    var dirY = end.clientY - start.clientY;
 	    var magnitude = Math.sqrt(dirX * dirX + dirY * dirY);
-	    var unitX = dirX / magnitude;
-	    var unitY = dirY / magnitude;
+	    var unitX = dirX ? dirX / magnitude : 0;
+	    var unitY = dirY ? dirY / magnitude : 0;
 	    return {
 	        dirX: dirX, dirY: dirY, unitX: unitX, unitY: unitY
 	    };
@@ -21794,7 +21807,8 @@
 	                fixed = _ref.fixed,
 	                fluid = _ref.fluid,
 	                onDragVertical = _ref.onDragVertical,
-	                onSwipeUp = _ref.onSwipeUp;
+	                onSwipeUp = _ref.onSwipeUp,
+	                onSwipeDown = _ref.onSwipeDown;
 
 	            if (fixed || !fluid) {
 	                return _react2.default.createElement(_Responsive2.default, {
@@ -21902,6 +21916,9 @@
 	                                            case 3:
 	                                                onSwipeUp(e);
 	                                                break;
+	                                            case 4:
+	                                                onSwipeDown(e);
+	                                                break;
 	                                        }
 	                                        _this2.attrs = _extends({}, _this2.attrs, { direction: 0 });
 	                                    },
@@ -21912,6 +21929,7 @@
 	                                            direction = _attrs.direction;
 
 	                                        var dir = 0;
+	                                        var newTouch = void 0;
 
 	                                        var _diff = diff(firstTouch, e.targetTouches[0]),
 	                                            unitX = _diff.unitX,
@@ -21925,16 +21943,16 @@
 	                                                _unitY = _diff2.unitY;
 
 	                                            if (direction > 2) {
-	                                                if (_unitY < -0.5) {
+	                                                if (_unitY < 0) {
 	                                                    dir = 3;
-	                                                } else if (_unitY > 0.5) {
+	                                                } else {
 	                                                    dir = 4;
 	                                                }
-	                                                onDragVertical(e, dirY);
+	                                                newTouch = onDragVertical(e, dirY);
 	                                            } else {
-	                                                if (_unitX < -0.5) {
+	                                                if (_unitX < 0) {
 	                                                    dir = 1;
-	                                                } else if (_unitX > 0.5) {
+	                                                } else {
 	                                                    dir = 2;
 	                                                }
 	                                            }
@@ -21950,8 +21968,9 @@
 	                                            }
 	                                        }
 	                                        _this2.attrs = _extends({}, _this2.attrs, {
-	                                            direction: dir ? dir : direction,
-	                                            lastTouch: e.targetTouches[0]
+	                                            direction: dir,
+	                                            lastTouch: e.targetTouches[0],
+	                                            firstTouch: newTouch || firstTouch
 	                                        });
 	                                    }
 	                                });
@@ -21977,7 +21996,8 @@
 	    fluid: _react.PropTypes.bool,
 	    fixed: _react.PropTypes.bool,
 	    onDragVertical: _react.PropTypes.func,
-	    onSwipeUp: _react.PropTypes.func
+	    onSwipeUp: _react.PropTypes.func,
+	    onSwipeDown: _react.PropTypes.func
 	};
 	Container.defaultProps = {
 	    col: [],
@@ -21990,6 +22010,9 @@
 	        return null;
 	    },
 	    onSwipeUp: function onSwipeUp() {
+	        return null;
+	    },
+	    onSwipeDown: function onSwipeDown() {
 	        return null;
 	    }
 	};

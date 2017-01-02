@@ -33,27 +33,38 @@ class MathRobot extends Component {
 }
 class Content extends Component {
     init() {
+        this.attrs = {
+            isMoving: false,
+            time: .3,
+        };
         return {
-            top: 0,
-            transition: 0,
+            bottom: 0,
+            transition: '',
         }
     }
     
-    run({}, {top, transition,}) {
+    run({}, {bottom, transition,}) {
         return (
             <Container
                 style={{
                     height: '100%',
                     backgroundColor: '#563D7C',
                     position: 'absolute',
-                    top,
+                    bottom,
                     transition,
                 }}
                 onDragVertical={(e, diff) => {
-                    this.setState({top: diff + 'px', transition: 0});
+                    const offset = Math.max(0, -diff);
+                    this.setState({bottom: offset + 'px', transition: ''});
+                    if (offset == 0)return e.targetTouches[0];
                 }}
                 onSwipeUp={() => {
-                    this.setState({top: '-100%', transition: 'top .2s'});
+                    const {time}=this.attrs;
+                    this.setState({bottom: '100%', transition: `bottom ${time}s`});
+                }}
+                onSwipeDown={() => {
+                    const {time}=this.attrs;
+                    this.setState({bottom: 0, transition: `bottom ${time}s`});
                 }}
             >
                 asdasdas

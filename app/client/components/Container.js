@@ -13,8 +13,8 @@ function diff(start, end) {
     const dirX = end.clientX - start.clientX;
     const dirY = end.clientY - start.clientY;
     const magnitude = Math.sqrt(dirX * dirX + dirY * dirY);
-    const unitX = dirX / magnitude;
-    const unitY = dirY / magnitude;
+    const unitX = dirX ? dirX / magnitude : 0;
+    const unitY = dirY ? dirY / magnitude : 0;
     return {
         dirX, dirY, unitX, unitY,
     }
@@ -32,7 +32,7 @@ class Container extends Component {
     run({
         children, style, col, offset,
         push, pull, hidden, fixed, fluid,
-        onDragVertical, onSwipeUp,
+        onDragVertical, onSwipeUp,onSwipeDown,
     }) {
         if (fixed || !fluid) {
             return (
@@ -89,29 +89,33 @@ class Container extends Component {
                                         case 3:
                                             onSwipeUp(e);
                                             break;
+                                        case 4:
+                                            onSwipeDown(e);
+                                            break;
                                     }
                                     this.attrs = {...this.attrs, direction: 0};
                                 }}
                                 onTouchMove={(e) => {
                                     const {firstTouch, lastTouch, direction,}=this.attrs;
                                     let dir = 0;
+                                    let newTouch;
                                     const {unitX, unitY, dirX, dirY,}=diff(firstTouch, e.targetTouches[0]);
                                     if (direction > 0) {
                                         const {unitX, unitY,}=diff(lastTouch, e.targetTouches[0]);
                                         if (direction > 2) {
-                                            if (unitY < -0.5) {
+                                            if (unitY < 0) {
                                                 dir = 3;
                                             }
-                                            else if (unitY > 0.5) {
+                                            else {
                                                 dir = 4;
                                             }
-                                            onDragVertical(e, dirY);
+                                            newTouch = onDragVertical(e, dirY);
                                         }
                                         else {
-                                            if (unitX < -0.5) {
+                                            if (unitX < 0) {
                                                 dir = 1;
                                             }
-                                            else if (unitX > 0.5) {
+                                            else {
                                                 dir = 2;
                                             }
                                         }
@@ -132,8 +136,9 @@ class Container extends Component {
                                     }
                                     this.attrs = {
                                         ...this.attrs,
-                                        direction: dir ? dir : direction,
-                                        lastTouch: e.targetTouches[0]
+                                        direction: dir,
+                                        lastTouch: e.targetTouches[0],
+                                        firstTouch: newTouch || firstTouch,
                                     };
                                 }}
                             />
@@ -154,6 +159,7 @@ Container.propTypes = {
     fixed: PropTypes.bool,
     onDragVertical: PropTypes.func,
     onSwipeUp: PropTypes.func,
+    onSwipeDown:PropTypes.func,
 };
 Container.defaultProps = {
     col: [],
@@ -164,5 +170,6 @@ Container.defaultProps = {
     fluid: true,
     onDragVertical: () => null,
     onSwipeUp: () => null,
+    onSwipeDown:() => null,
 };
 export default Container;
