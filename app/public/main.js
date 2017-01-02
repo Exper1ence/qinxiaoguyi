@@ -73,7 +73,7 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	
-	var DEBUG = false;
+	var DEBUG = true;
 	
 	var MathRobot = function (_Component) {
 	    _inherits(MathRobot, _Component);
@@ -92,6 +92,13 @@
 	        value: function run(_ref) {
 	            var children = _ref.children;
 	
+	            if (DEBUG) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { style: { backgroundColor: 'red', height: '100%', width: '100%' } },
+	                    'test'
+	                );
+	            }
 	            return _react2.default.createElement(
 	                _components.Wrapper,
 	                { style: {} },
