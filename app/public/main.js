@@ -73,6 +73,8 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
+	var DEBUG = true;
+
 	var MathRobot = function (_Component) {
 	    _inherits(MathRobot, _Component);
 
@@ -122,7 +124,6 @@
 	        key: 'init',
 	        value: function init() {
 	            this.attrs = {
-	                isMoving: false,
 	                time: .3
 	            };
 	            return {
@@ -140,34 +141,38 @@
 
 	            _objectDestructuringEmpty(_ref2);
 
-	            return _react2.default.createElement(
-	                _components.Container,
-	                {
-	                    style: {
-	                        height: '100%',
-	                        backgroundColor: '#563D7C',
-	                        position: 'absolute',
-	                        bottom: bottom,
-	                        transition: transition
-	                    },
-	                    onDragVertical: function onDragVertical(e, diff) {
-	                        var offset = Math.max(0, -diff);
-	                        _this3.setState({ bottom: offset + 'px', transition: '' });
-	                        if (offset == 0) return e.targetTouches[0];
-	                    },
-	                    onSwipeUp: function onSwipeUp() {
-	                        var time = _this3.attrs.time;
+	            if (DEBUG) {
+	                return _react2.default.createElement(_components.Container, { children: 'hehe' });
+	            } else {
+	                return _react2.default.createElement(
+	                    _components.Container,
+	                    {
+	                        style: {
+	                            height: '100%',
+	                            backgroundColor: '#563D7C',
+	                            position: 'absolute',
+	                            bottom: bottom,
+	                            transition: transition
+	                        },
+	                        onDragVertical: function onDragVertical(e, diff) {
+	                            var offset = Math.max(0, -diff);
+	                            _this3.setState({ bottom: offset + 'px', transition: '' });
+	                            if (offset == 0) return e.targetTouches[0];
+	                        },
+	                        onSwipeUp: function onSwipeUp() {
+	                            var time = _this3.attrs.time;
 
-	                        _this3.setState({ bottom: '100%', transition: 'bottom ' + time + 's' });
-	                    },
-	                    onSwipeDown: function onSwipeDown() {
-	                        var time = _this3.attrs.time;
+	                            _this3.setState({ bottom: '100%', transition: 'bottom ' + time + 's' });
+	                        },
+	                        onSwipeDown: function onSwipeDown() {
+	                            var time = _this3.attrs.time;
 
-	                        _this3.setState({ bottom: 0, transition: 'bottom ' + time + 's' });
-	                    }
-	                },
-	                'asdasdas'
-	            );
+	                            _this3.setState({ bottom: 0, transition: 'bottom ' + time + 's' });
+	                        }
+	                    },
+	                    'asdasdas'
+	                );
+	            }
 	        }
 	    }]);
 

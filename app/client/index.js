@@ -12,6 +12,7 @@ import {
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import 'babel-polyfill';
 
+const DEBUG = true;
 class MathRobot extends Component {
     constructor(props) {
         super(props);
@@ -35,7 +36,6 @@ class MathRobot extends Component {
 class Content extends Component {
     init() {
         this.attrs = {
-            isMoving: false,
             time: .3,
         };
         return {
@@ -45,32 +45,39 @@ class Content extends Component {
     }
     
     run({}, {bottom, transition,}) {
-        return (
-            <Container
-                style={{
-                    height: '100%',
-                    backgroundColor: '#563D7C',
-                    position: 'absolute',
-                    bottom,
-                    transition,
-                }}
-                onDragVertical={(e, diff) => {
-                    const offset = Math.max(0, -diff);
-                    this.setState({bottom: offset + 'px', transition: ''});
-                    if (offset == 0)return e.targetTouches[0];
-                }}
-                onSwipeUp={() => {
-                    const {time}=this.attrs;
-                    this.setState({bottom: '100%', transition: `bottom ${time}s`});
-                }}
-                onSwipeDown={() => {
-                    const {time}=this.attrs;
-                    this.setState({bottom: 0, transition: `bottom ${time}s`});
-                }}
-            >
-                asdasdas
-            </Container>
-        )
+        if (DEBUG) {
+            return (
+                <Container children={'hehe'}/>
+            )
+        }
+        else {
+            return (
+                <Container
+                    style={{
+                        height: '100%',
+                        backgroundColor: '#563D7C',
+                        position: 'absolute',
+                        bottom,
+                        transition,
+                    }}
+                    onDragVertical={(e, diff) => {
+                        const offset = Math.max(0, -diff);
+                        this.setState({bottom: offset + 'px', transition: ''});
+                        if (offset == 0)return e.targetTouches[0];
+                    }}
+                    onSwipeUp={() => {
+                        const {time}=this.attrs;
+                        this.setState({bottom: '100%', transition: `bottom ${time}s`});
+                    }}
+                    onSwipeDown={() => {
+                        const {time}=this.attrs;
+                        this.setState({bottom: 0, transition: `bottom ${time}s`});
+                    }}
+                >
+                    asdasdas
+                </Container>
+            )
+        }
     }
 }
 class Test extends Component {
