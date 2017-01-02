@@ -9,16 +9,30 @@ import _ from './util';
 
 const COL_PERCENTAGE = 100 / 12;
 
+function diff(start, end) {
+    const dirX = end.clientX - start.clientX;
+    const dirY = end.clientY - start.clientY;
+    const magnitude = Math.sqrt(dirX * dirX + dirY * dirY);
+    const unitX = dirX / magnitude;
+    const unitY = dirY / magnitude;
+    return {
+        dirX, dirY, unitX, unitY,
+    }
+}
+
 class Container extends Component {
-    constructor(props) {
-        super(props);
+    init() {
+        this.attrs = {
+            firstTouch: {clientX: 0, clientY: 0},
+            lastTouch: {clientX: 0, clientY: 0},
+            direction: 0,
+        };
     }
     
     run({
         children, style, col, offset,
         push, pull, hidden, fixed, fluid,
-        onTouchCancel, onTouchStart, onTouchEnd,
-        onTouchMove,
+        onDragVertical, onSwipeUp,
     }) {
         if (fixed || !fluid) {
             return (
@@ -67,10 +81,61 @@ class Container extends Component {
                                     ...style,
                                 }}
                                 children={children}
-                                onTouchCancel={onTouchCancel}
-                                onTouchStart={onTouchStart}
-                                onTouchEnd={onTouchEnd}
-                                onTouchMove={onTouchMove}
+                                onTouchStart={(e) => {
+                                    this.attrs = {...this.attrs, firstTouch: e.targetTouches[0]};
+                                }}
+                                onTouchEnd={(e) => {
+                                    switch (this.attrs.direction) {
+                                        case 3:
+                                            onSwipeUp(e);
+                                            break;
+                                    }
+                                    this.attrs = {...this.attrs, direction: 0};
+                                }}
+                                onTouchMove={(e) => {
+                                    const {firstTouch, lastTouch, direction,}=this.attrs;
+                                    let dir = 0;
+                                    const {unitX, unitY, dirX, dirY,}=diff(firstTouch, e.targetTouches[0]);
+                                    if (direction > 0) {
+                                        const {unitX, unitY,}=diff(lastTouch, e.targetTouches[0]);
+                                        if (direction > 2) {
+                                            if (unitY < -0.5) {
+                                                dir = 3;
+                                            }
+                                            else if (unitY > 0.5) {
+                                                dir = 4;
+                                            }
+                                            onDragVertical(e, dirY);
+                                        }
+                                        else {
+                                            if (unitX < -0.5) {
+                                                dir = 1;
+                                            }
+                                            else if (unitX > 0.5) {
+                                                dir = 2;
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        if (unitX < -0.5) {
+                                            dir = 1;
+                                        }
+                                        else if (unitX > 0.5) {
+                                            dir = 2;
+                                        }
+                                        else if (unitY < -0.5) {
+                                            dir = 3;
+                                        }
+                                        else if (unitY > 0.5) {
+                                            dir = 4;
+                                        }
+                                    }
+                                    this.attrs = {
+                                        ...this.attrs,
+                                        direction: dir ? dir : direction,
+                                        lastTouch: e.targetTouches[0]
+                                    };
+                                }}
                             />
                         )
                     }}
@@ -87,6 +152,8 @@ Container.propTypes = {
     hidden: PropTypes.array,
     fluid: PropTypes.bool,
     fixed: PropTypes.bool,
+    onDragVertical: PropTypes.func,
+    onSwipeUp: PropTypes.func,
 };
 Container.defaultProps = {
     col: [],
@@ -95,5 +162,7 @@ Container.defaultProps = {
     pull: [],
     hidden: [],
     fluid: true,
+    onDragVertical: () => null,
+    onSwipeUp: () => null,
 };
 export default Container;

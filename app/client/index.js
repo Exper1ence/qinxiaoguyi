@@ -20,38 +20,40 @@ class MathRobot extends Component {
     }
     
     run({children,}) {
-        let routes = [
-            {name: 'Bootstrap', path: '/test',},
-            {name: 'Documentation', path: '/doc',},
-            {name: 'Examples', path: '/exa'}
-        ];
         return (
-            <Wrapper style={{flexDirection: 'column'}}>
-                <Navigator routes={routes}/>
-                <Container style={{flexGrow: 1}}>{children}</Container>
+            <Wrapper style={{}}>
+                <Container style={{
+                    height: '100%',
+                    overflow: 'hidden',
+                    position: 'relative'
+                }}>{children}</Container>
             </Wrapper>
         )
     }
 }
 class Content extends Component {
-    run() {
+    init() {
+        return {
+            top: 0,
+            transition: 0,
+        }
+    }
+    
+    run({}, {top, transition,}) {
         return (
             <Container
                 style={{
+                    height: '100%',
                     backgroundColor: '#563D7C',
-                    flexGrow: 1,
+                    position: 'absolute',
+                    top,
+                    transition,
                 }}
-                onTouchCancel={()=>{
-                    console.log('cancel');
+                onDragVertical={(e, diff) => {
+                    this.setState({top: diff + 'px', transition: 0});
                 }}
-                onTouchStart={()=>{
-                    console.log('start');
-                }}
-                onTouchEnd={()=>{
-                    console.log('end');
-                }}
-                onTouchMove={()=>{
-                    console.log('move');
+                onSwipeUp={() => {
+                    this.setState({top: '-100%', transition: 'top .2s'});
                 }}
             >
                 asdasdas

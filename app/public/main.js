@@ -60,6 +60,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -86,14 +88,16 @@
 	        value: function run(_ref) {
 	            var children = _ref.children;
 
-	            var routes = [{ name: 'Bootstrap', path: '/test' }, { name: 'Documentation', path: '/doc' }, { name: 'Examples', path: '/exa' }];
 	            return _react2.default.createElement(
 	                _components.Wrapper,
-	                { style: { flexDirection: 'column' } },
-	                _react2.default.createElement(_components.Navigator, { routes: routes }),
+	                { style: {} },
 	                _react2.default.createElement(
 	                    _components.Container,
-	                    { style: { flexGrow: 1 } },
+	                    { style: {
+	                            height: '100%',
+	                            overflow: 'hidden',
+	                            position: 'relative'
+	                        } },
 	                    children
 	                )
 	            );
@@ -113,26 +117,38 @@
 	    }
 
 	    _createClass(Content, [{
+	        key: 'init',
+	        value: function init() {
+	            return {
+	                top: 0,
+	                transition: 0
+	            };
+	        }
+	    }, {
 	        key: 'run',
-	        value: function run() {
+	        value: function run(_ref2, _ref3) {
+	            var _this3 = this;
+
+	            var top = _ref3.top,
+	                transition = _ref3.transition;
+
+	            _objectDestructuringEmpty(_ref2);
+
 	            return _react2.default.createElement(
 	                _components.Container,
 	                {
 	                    style: {
+	                        height: '100%',
 	                        backgroundColor: '#563D7C',
-	                        flexGrow: 1
+	                        position: 'absolute',
+	                        top: top,
+	                        transition: transition
 	                    },
-	                    onTouchCancel: function onTouchCancel() {
-	                        console.log('cancel');
+	                    onDragVertical: function onDragVertical(e, diff) {
+	                        _this3.setState({ top: diff + 'px', transition: 0 });
 	                    },
-	                    onTouchStart: function onTouchStart() {
-	                        console.log('start');
-	                    },
-	                    onTouchEnd: function onTouchEnd() {
-	                        console.log('end');
-	                    },
-	                    onTouchMove: function onTouchMove() {
-	                        console.log('move');
+	                    onSwipeUp: function onSwipeUp() {
+	                        _this3.setState({ top: '-100%', transition: 'top .2s' });
 	                    }
 	                },
 	                'asdasdas'
@@ -21734,18 +21750,40 @@
 
 	var COL_PERCENTAGE = 100 / 12;
 
+	function diff(start, end) {
+	    var dirX = end.clientX - start.clientX;
+	    var dirY = end.clientY - start.clientY;
+	    var magnitude = Math.sqrt(dirX * dirX + dirY * dirY);
+	    var unitX = dirX / magnitude;
+	    var unitY = dirY / magnitude;
+	    return {
+	        dirX: dirX, dirY: dirY, unitX: unitX, unitY: unitY
+	    };
+	}
+
 	var Container = function (_Component) {
 	    _inherits(Container, _Component);
 
-	    function Container(props) {
+	    function Container() {
 	        _classCallCheck(this, Container);
 
-	        return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).call(this, props));
+	        return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
 	    }
 
 	    _createClass(Container, [{
+	        key: 'init',
+	        value: function init() {
+	            this.attrs = {
+	                firstTouch: { clientX: 0, clientY: 0 },
+	                lastTouch: { clientX: 0, clientY: 0 },
+	                direction: 0
+	            };
+	        }
+	    }, {
 	        key: 'run',
 	        value: function run(_ref) {
+	            var _this2 = this;
+
 	            var children = _ref.children,
 	                style = _ref.style,
 	                col = _ref.col,
@@ -21755,10 +21793,8 @@
 	                hidden = _ref.hidden,
 	                fixed = _ref.fixed,
 	                fluid = _ref.fluid,
-	                onTouchCancel = _ref.onTouchCancel,
-	                onTouchStart = _ref.onTouchStart,
-	                onTouchEnd = _ref.onTouchEnd,
-	                onTouchMove = _ref.onTouchMove;
+	                onDragVertical = _ref.onDragVertical,
+	                onSwipeUp = _ref.onSwipeUp;
 
 	            if (fixed || !fluid) {
 	                return _react2.default.createElement(_Responsive2.default, {
@@ -21858,10 +21894,66 @@
 	                                        display: display
 	                                    }, style),
 	                                    children: children,
-	                                    onTouchCancel: onTouchCancel,
-	                                    onTouchStart: onTouchStart,
-	                                    onTouchEnd: onTouchEnd,
-	                                    onTouchMove: onTouchMove
+	                                    onTouchStart: function onTouchStart(e) {
+	                                        _this2.attrs = _extends({}, _this2.attrs, { firstTouch: e.targetTouches[0] });
+	                                    },
+	                                    onTouchEnd: function onTouchEnd(e) {
+	                                        switch (_this2.attrs.direction) {
+	                                            case 3:
+	                                                onSwipeUp(e);
+	                                                break;
+	                                        }
+	                                        _this2.attrs = _extends({}, _this2.attrs, { direction: 0 });
+	                                    },
+	                                    onTouchMove: function onTouchMove(e) {
+	                                        var _attrs = _this2.attrs,
+	                                            firstTouch = _attrs.firstTouch,
+	                                            lastTouch = _attrs.lastTouch,
+	                                            direction = _attrs.direction;
+
+	                                        var dir = 0;
+
+	                                        var _diff = diff(firstTouch, e.targetTouches[0]),
+	                                            unitX = _diff.unitX,
+	                                            unitY = _diff.unitY,
+	                                            dirX = _diff.dirX,
+	                                            dirY = _diff.dirY;
+
+	                                        if (direction > 0) {
+	                                            var _diff2 = diff(lastTouch, e.targetTouches[0]),
+	                                                _unitX = _diff2.unitX,
+	                                                _unitY = _diff2.unitY;
+
+	                                            if (direction > 2) {
+	                                                if (_unitY < -0.5) {
+	                                                    dir = 3;
+	                                                } else if (_unitY > 0.5) {
+	                                                    dir = 4;
+	                                                }
+	                                                onDragVertical(e, dirY);
+	                                            } else {
+	                                                if (_unitX < -0.5) {
+	                                                    dir = 1;
+	                                                } else if (_unitX > 0.5) {
+	                                                    dir = 2;
+	                                                }
+	                                            }
+	                                        } else {
+	                                            if (unitX < -0.5) {
+	                                                dir = 1;
+	                                            } else if (unitX > 0.5) {
+	                                                dir = 2;
+	                                            } else if (unitY < -0.5) {
+	                                                dir = 3;
+	                                            } else if (unitY > 0.5) {
+	                                                dir = 4;
+	                                            }
+	                                        }
+	                                        _this2.attrs = _extends({}, _this2.attrs, {
+	                                            direction: dir ? dir : direction,
+	                                            lastTouch: e.targetTouches[0]
+	                                        });
+	                                    }
 	                                });
 	                            }
 	                        })
@@ -21883,7 +21975,9 @@
 	    pull: _react.PropTypes.array,
 	    hidden: _react.PropTypes.array,
 	    fluid: _react.PropTypes.bool,
-	    fixed: _react.PropTypes.bool
+	    fixed: _react.PropTypes.bool,
+	    onDragVertical: _react.PropTypes.func,
+	    onSwipeUp: _react.PropTypes.func
 	};
 	Container.defaultProps = {
 	    col: [],
@@ -21891,7 +21985,13 @@
 	    push: [],
 	    pull: [],
 	    hidden: [],
-	    fluid: true
+	    fluid: true,
+	    onDragVertical: function onDragVertical() {
+	        return null;
+	    },
+	    onSwipeUp: function onSwipeUp() {
+	        return null;
+	    }
 	};
 	exports.default = Container;
 
@@ -21934,14 +22034,14 @@
 
 	        var _this = _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).call(this, props));
 
-	        _this.state = _util2.default.toFunction(_this.init)(_this.props);
+	        _this.state = _util2.default.toFunction(_this.init).call(_this, _this.props);
 	        return _this;
 	    }
 
 	    _createClass(Component, [{
 	        key: 'render',
 	        value: function render() {
-	            return _util2.default.toFunction(this.run.bind(this))(_util2.default.toPlainObject(this.props), _util2.default.toPlainObject(this.state));
+	            return _util2.default.toFunction(this.run).call(this, _util2.default.toPlainObject(this.props), _util2.default.toPlainObject(this.state));
 	        }
 	    }]);
 
