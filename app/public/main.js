@@ -73,7 +73,7 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var DEBUG = true;
+	var DEBUG = false;
 
 	var MathRobot = function (_Component) {
 	    _inherits(MathRobot, _Component);
@@ -144,34 +144,27 @@
 	            if (DEBUG) {
 	                return _react2.default.createElement(_components.Container, { children: 'hehe' });
 	            } else {
-	                return _react2.default.createElement(
-	                    _components.Container,
-	                    {
-	                        style: {
-	                            height: '100%',
-	                            backgroundColor: '#563D7C',
-	                            position: 'absolute',
-	                            bottom: bottom,
-	                            transition: transition
-	                        },
-	                        onDragVertical: function onDragVertical(e, diff) {
-	                            var offset = Math.max(0, -diff);
-	                            _this3.setState({ bottom: offset + 'px', transition: '' });
-	                            if (offset == 0) return e.targetTouches[0];
-	                        },
-	                        onSwipeUp: function onSwipeUp() {
-	                            var time = _this3.attrs.time;
-
-	                            _this3.setState({ bottom: '100%', transition: 'bottom ' + time + 's' });
-	                        },
-	                        onSwipeDown: function onSwipeDown() {
-	                            var time = _this3.attrs.time;
-
-	                            _this3.setState({ bottom: 0, transition: 'bottom ' + time + 's' });
-	                        }
+	                return _react2.default.createElement(_components.Container, {
+	                    style: {
+	                        height: '100%',
+	                        backgroundColor: '#563D7C'
 	                    },
-	                    'asdasdas'
-	                );
+	                    onDragVertical: function onDragVertical(e, diff) {
+	                        var offset = Math.max(0, -diff);
+	                        _this3.setState({ bottom: offset + 'px', transition: '' });
+	                        if (offset == 0) return e.targetTouches[0];
+	                    },
+	                    onSwipeUp: function onSwipeUp() {
+	                        var time = _this3.attrs.time;
+
+	                        _this3.setState({ bottom: '100%', transition: 'bottom ' + time + 's' });
+	                    },
+	                    onSwipeDown: function onSwipeDown() {
+	                        var time = _this3.attrs.time;
+
+	                        _this3.setState({ bottom: 0, transition: 'bottom ' + time + 's' });
+	                    }
+	                });
 	            }
 	        }
 	    }]);

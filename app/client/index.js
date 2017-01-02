@@ -12,7 +12,7 @@ import {
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import 'babel-polyfill';
 
-const DEBUG = true;
+const DEBUG = false;
 class MathRobot extends Component {
     constructor(props) {
         super(props);
@@ -56,9 +56,6 @@ class Content extends Component {
                     style={{
                         height: '100%',
                         backgroundColor: '#563D7C',
-                        position: 'absolute',
-                        bottom,
-                        transition,
                     }}
                     onDragVertical={(e, diff) => {
                         const offset = Math.max(0, -diff);
@@ -73,9 +70,7 @@ class Content extends Component {
                         const {time}=this.attrs;
                         this.setState({bottom: 0, transition: `bottom ${time}s`});
                     }}
-                >
-                    asdasdas
-                </Container>
+                />
             )
         }
     }
