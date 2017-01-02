@@ -10,6 +10,7 @@ import {
     Link,
 } from './components';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import 'babel-polyfill';
 
 class MathRobot extends Component {
     constructor(props) {
