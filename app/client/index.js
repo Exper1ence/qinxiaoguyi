@@ -70,7 +70,7 @@ class Content extends Component {
                         const {time}=this.attrs;
                         this.setState({bottom: 0, transition: `bottom ${time}s`});
                     }}
-                    children={'fuck'}
+                    children={'test'}
                 />
             )
         }

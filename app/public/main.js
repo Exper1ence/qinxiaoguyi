@@ -160,7 +160,7 @@
 
 	                        _this3.setState({ bottom: 0, transition: 'bottom ' + time + 's' });
 	                    },
-	                    children: 'fuck'
+	                    children: 'test'
 	                });
 	            }
 	        }
