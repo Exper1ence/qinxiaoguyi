@@ -16,6 +16,7 @@ class View extends Component {
                 display: 'flex',
                 flexWrap: 'wrap',
                 boxSizing: 'border-box',
+                alignItems:'stretch',
                 ...style,
             }}/>
         )

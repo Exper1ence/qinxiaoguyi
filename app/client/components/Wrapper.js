@@ -12,7 +12,7 @@ import store from './store';
 class Wrapper extends Component {
     run({children, style,}) {
         return (
-            <Provider store={store}>
+            <Provider store={store} style={{height: '100%'}}>
                 <View style={{
                     width: '100%',
                     color: '#373a3c',

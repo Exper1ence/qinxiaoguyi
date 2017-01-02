@@ -12,7 +12,7 @@ import {
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import 'babel-polyfill';
 
-const DEBUG = true;
+const DEBUG = false;
 class MathRobot extends Component {
     constructor(props) {
         super(props);
@@ -22,19 +22,9 @@ class MathRobot extends Component {
     }
     
     run({children,}) {
-        if (DEBUG) {
-            return (
-                <div style={{backgroundColor: 'red', height: '100%', width: '100%'}}>test</div>
-            )
-        }
         return (
             <Wrapper style={{}}>
-                <Container style={{
-                    height: '100%',
-                    overflow: 'hidden',
-                    position: 'relative',
-                    backgroundColor: 'yellow',
-                }}>{children}</Container>
+                {children}
             </Wrapper>
         )
     }
@@ -62,6 +52,10 @@ class Content extends Component {
                     style={{
                         color: '#fff',
                         backgroundColor: '#563D7C',
+                        position: 'absolute',
+                        bottom,
+                        transition,
+                        height: '100%',
                     }}
                     onDragVertical={(e, diff) => {
                         const offset = Math.max(0, -diff);
@@ -76,7 +70,7 @@ class Content extends Component {
                         const {time}=this.attrs;
                         this.setState({bottom: 0, transition: `bottom ${time}s`});
                     }}
-                    children={'aaaaaaaaaaaaaaaa'}
+                    children={'fuck'}
                 />
             )
         }
@@ -96,7 +90,7 @@ class Doc extends Component {
         )
     }
 }
-
+// render(<MathRobot/>, document.getElementById('math-robot'));
 render((
     <Router history={browserHistory}>
         <Route path="/" component={MathRobot}>
