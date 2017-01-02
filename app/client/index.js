@@ -27,7 +27,8 @@ class MathRobot extends Component {
                 <Container style={{
                     height: '100%',
                     overflow: 'hidden',
-                    position: 'relative'
+                    position: 'relative',
+                    backgroundColor:'yellow',
                 }}>{children}</Container>
             </Wrapper>
         )

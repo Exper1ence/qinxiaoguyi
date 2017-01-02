@@ -32,8 +32,9 @@ class Container extends Component {
     run({
         children, style, col, offset,
         push, pull, hidden, fixed, fluid,
-        onDragVertical, onSwipeUp,onSwipeDown,
+        onDragVertical, onSwipeUp, onSwipeDown,
     }) {
+        style = {alignItems: 'stretch', ...style};
         if (fixed || !fluid) {
             return (
                 <Responsive
@@ -159,7 +160,7 @@ Container.propTypes = {
     fixed: PropTypes.bool,
     onDragVertical: PropTypes.func,
     onSwipeUp: PropTypes.func,
-    onSwipeDown:PropTypes.func,
+    onSwipeDown: PropTypes.func,
 };
 Container.defaultProps = {
     col: [],
@@ -170,6 +171,6 @@ Container.defaultProps = {
     fluid: true,
     onDragVertical: () => null,
     onSwipeUp: () => null,
-    onSwipeDown:() => null,
+    onSwipeDown: () => null,
 };
 export default Container;

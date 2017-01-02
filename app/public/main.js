@@ -100,7 +100,8 @@
 	                    { style: {
 	                            height: '100%',
 	                            overflow: 'hidden',
-	                            position: 'relative'
+	                            position: 'relative',
+	                            backgroundColor: 'yellow'
 	                        } },
 	                    children
 	                )
@@ -21811,6 +21812,7 @@
 	                onSwipeUp = _ref.onSwipeUp,
 	                onSwipeDown = _ref.onSwipeDown;
 	
+	            style = _extends({ alignItems: 'stretch' }, style);
 	            if (fixed || !fluid) {
 	                return _react2.default.createElement(_Responsive2.default, {
 	                    xs: { width: '100%' },
