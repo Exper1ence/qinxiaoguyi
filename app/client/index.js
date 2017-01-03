@@ -12,7 +12,7 @@ import {
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import 'babel-polyfill';
 
-const DEBUG = false;
+const DEBUG = true;
 class MathRobot extends Component {
     constructor(props) {
         super(props);
@@ -22,6 +22,11 @@ class MathRobot extends Component {
     }
     
     run({children,}) {
+        if(DEBUG){
+            return(
+                <div style={{width:'100%',height:'100%',backgroundColor:'blue'}}>test</div>
+            )
+        }
         return (
             <Wrapper style={{}}>
                 {children}
