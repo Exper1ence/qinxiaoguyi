@@ -2,7 +2,7 @@
  * Created by Exper1ence on 2017/1/2.
  */
 ENV = {
-    DEBUG: true,
+    DEBUG: false,
 };
 const router = require('./router');
 //asd
