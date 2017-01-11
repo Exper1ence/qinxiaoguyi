@@ -95,7 +95,7 @@
 	            if (DEBUG) {
 	                return _react2.default.createElement(
 	                    'div',
-	                    { style: { width: '100%', height: '100%', backgroundColor: 'blue' } },
+	                    { style: { width: '500px', height: '500px', backgroundColor: 'blue' } },
 	                    'test'
 	                );
 	            }
@@ -234,7 +234,7 @@
 	        _react2.default.createElement(_reactRouter.Route, { path: '/test', component: Test }),
 	        _react2.default.createElement(_reactRouter.Route, { path: '/doc', component: Doc })
 	    )
-	), document.getElementById('math-robot'));
+	), document.getElementById('qxgy'));
 
 /***/ },
 /* 1 */

@@ -24,7 +24,7 @@ class MathRobot extends Component {
     run({children,}) {
         if(DEBUG){
             return(
-                <div style={{width:'100%',height:'100%',backgroundColor:'blue'}}>test</div>
+                <div style={{width:'500px',height:'500px',backgroundColor:'blue'}}>test</div>
             )
         }
         return (
@@ -104,4 +104,4 @@ render((
             <Route path="/doc" component={Doc}/>
         </Route>
     </Router>
-), document.getElementById('math-robot'));
+), document.getElementById('qxgy'));
