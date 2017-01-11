@@ -4,4 +4,4 @@
 const router = require('./router');
 //asd
 require('./app')(router);
-router.start(3000);
+router.start(80);
