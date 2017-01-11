@@ -12,7 +12,7 @@ import {
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import 'babel-polyfill';
 
-const DEBUG = true;
+const DEBUG = false;
 class MathRobot extends Component {
     constructor(props) {
         super(props);
