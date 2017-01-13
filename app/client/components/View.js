@@ -5,21 +5,22 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 
 class View extends Component {
-    constructor(props) {
-        super(props);
-        
-    }
-    
-    run({style,}) {
+    _run({style}) {
         return (
             <div {...this.props} style={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 boxSizing: 'border-box',
-                alignItems:'stretch',
+                alignItems: 'stretch',
                 ...style,
-            }}/>
+            }}
+                 ref={div => this.element = div}
+            />
         )
     }
 }
+View.propTypes = {
+};
+View.defaultProps = {
+};
 export default View;

@@ -7,11 +7,11 @@ import _ from './util';
 export default class Component extends Base {
     constructor(props) {
         super(props);
-        this.state = _.toFunction(this.init).call(this, this.props);
+        Object.assign(this, _.toFunction(this._init).call(this, this.props));
     }
     
     render() {
-        return _.toFunction(this.run)
-            .call(this, _.toPlainObject(this.props), _.toPlainObject(this.state));
+        return _.toFunction(this._run)
+            .call(this, _.toPlainObject(this.props), _.toPlainObject(this.state),this);
     }
 }

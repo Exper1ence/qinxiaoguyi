@@ -2,20 +2,12 @@
  * Created by Exper1ence on 2016/12/31.
  */
 import React, {PropTypes} from 'react';
-import {connect,} from 'react-redux';
 import Component from './Component';
-import Container from './Container';
-import Text from './Text';
 import Color from './color';
 import {propTypes, defaultProps} from './types';
 
 class Semantic extends Component {
-    constructor(props) {
-        super(props);
-        
-    }
-    
-    run({render, primary, secondary, success, info, warning, danger,}) {
+    _run({render, primary, secondary, success, info, warning, danger,}) {
         let backgroundColor = '#fff';
         if (danger) backgroundColor = '#d9534f';
         else if (warning) backgroundColor = '#f0ad4e';

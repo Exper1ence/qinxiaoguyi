@@ -2,20 +2,13 @@
  * Created by Exper1ence on 2016/12/31.
  */
 import React, {PropTypes} from 'react';
-import {connect,} from 'react-redux';
 import Component from './Component';
 import Container from './Container';
-import Text from './Text';
 import Margin from './Margin';
 import {propTypes, defaultProps} from './types';
 
 class MarginList extends Component {
-    constructor(props) {
-        super(props);
-        
-    }
-    
-    run({children, style, horizontal, vertical,}) {
+    _run({children, style, horizontal, vertical,}) {
         const elements = [];
         for (let i = 0, len = children.length - 1; i < len; i++) {
             elements.push(children[i]);

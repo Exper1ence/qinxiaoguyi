@@ -7,12 +7,7 @@ import Container from './Container';
 import Text from './Text';
 
 export default class Padding extends Component {
-    constructor(props) {
-        super(props);
-        
-    }
-    
-    run({children, style, small, large,}) {
+    _run({children, style, small, large,}) {
         return (
             <Container style={{padding: large ? '1rem' : (small ? '.25rem' : '.5rem')}}>
                 {children}

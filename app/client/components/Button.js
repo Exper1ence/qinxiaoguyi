@@ -8,12 +8,13 @@ import Semantic from './Semantic';
 import {propTypes, defaultProps} from './types';
 
 class Button extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {brightness: 100};
+    _init() {
+        return {
+            state: {brightness: 100},
+        }
     }
     
-    run({children, style,}, {brightness}) {
+    _run({children, style,}, {brightness}) {
         return (
             <Semantic {...this.props}
                       render={({color, backgroundColor, borderColor}) => (

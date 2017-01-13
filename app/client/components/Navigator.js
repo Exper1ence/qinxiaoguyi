@@ -2,19 +2,12 @@
  * Created by Exper1ence on 2017/1/1.
  */
 import React, {PropTypes} from 'react';
-import {connect,} from 'react-redux';
 import Component from './Component';
 import Container from './Container';
-import View from './View';
 import Link from './Link';
 
 class Navigator extends Component {
-    constructor(props) {
-        super(props);
-        
-    }
-    
-    run({routes, style,}) {
+    _run({routes, style,}) {
         routes = routes.map((route, i) => {
             return (
                 <Link to={route.path} key={i} style={{

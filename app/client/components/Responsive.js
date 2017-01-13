@@ -1,18 +1,36 @@
-// /**
-//  * Created by Exper1ence on 2016/12/31.
-//  */
 import React, {PropTypes} from 'react';
 import Component from './Component';
-import Text from './Text';
-import {connect,} from 'react-redux';
 
 class Responsive extends Component {
-    constructor(props) {
-        super(props);
-        
+    _init() {
+        window.addEventListener("resize", () => this.setState({
+            resolution: this._getRes(),
+        }));
+        return {
+            state: {
+                resolution: this._getRes(),
+            }
+        }
     }
     
-    run({resolution, xs, sm, md, lg, xl, render,}) {
+    _getRes() {
+        const {offsetWidth,}=document.body;
+        if (offsetWidth < 576) {
+            return 0;
+        }
+        else if (offsetWidth >= 576 && offsetWidth < 768) {
+            return 1;
+        }
+        else if (offsetWidth >= 768 && offsetWidth < 992) {
+            return 2
+        }
+        else if (offsetWidth >= 992 && offsetWidth < 1200) {
+            return 3
+        }
+        return 4;
+    }
+    
+    _run({xs, sm, md, lg, xl, render,}, {resolution}) {
         let args;
         if (resolution >= 0) {
             args = {...xs};
@@ -48,9 +66,4 @@ Responsive.defaultProps = {
     xl: {},
     render: () => null,
 };
-function mapState(state) {
-    return {
-        resolution: state.resolution,
-    }
-}
-export default connect(mapState)(Responsive);
+export default Responsive;

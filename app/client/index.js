@@ -1,111 +1,23 @@
 /**
  * Created by Exper1ence on 2016/12/30.
  */
-import React from 'react';
-import {render} from 'react-dom';
-import {
-    Container, Component,
-    Wrapper, Padding, Text, Responsive,
-    Button, Navigator, View, Footer,
-    Link,
-} from './components';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import 'babel-polyfill';
 import ENV from './ENV';
 window.ENV = ENV;
-
-class MathRobot extends Component {
-    componentDidMount() {
-    }
-    
-    run({children,}) {
-        if (ENV.debug) {
-            return (
-                <Wrapper style={{}}>
-                    {children}
-                </Wrapper>
-            )
-        }
-        else {
-            return (
-                <div style={{height: '100%', backgroundColor: 'blue'}}>test</div>
-            )
-        }
-    }
-}
-class Content extends Component {
-    init() {
-        this.attrs = {
-            time: .3,
-        };
-        return {
-            bottom: 0,
-            transition: '',
-        }
-    }
-    
-    run({}, {bottom, transition,}) {
-        if (ENV.debug) {
-            return (
-                <Container children={'hehe'}/>
-            )
-        }
-        else {
-            return (
-                <Container
-                    style={{
-                        color: '#fff',
-                        backgroundColor: '#563D7C',
-                        position: 'absolute',
-                        bottom,
-                        transition,
-                        height: '100%',
-                    }}
-                    onDragVertical={(e, diff) => {
-                        const offset = Math.max(0, -diff);
-                        this.setState({bottom: offset + 'px', transition: ''});
-                        if (offset == 0)return e.targetTouches[0];
-                    }}
-                    onSwipeUp={() => {
-                        const {time}=this.attrs;
-                        this.setState({bottom: '100%', transition: `bottom ${time}s`});
-                    }}
-                    onSwipeDown={() => {
-                        const {time}=this.attrs;
-                        this.setState({bottom: 0, transition: `bottom ${time}s`});
-                    }}
-                    children={'test'}
-                />
-            )
-        }
-    }
-}
-class Test extends Component {
-    run() {
-        return (
-            <div>test</div>
-        )
-    }
-}
-class Doc extends Component {
-    run() {
-        return (
-            <div>doc</div>
-        )
-    }
-}
+import React from 'react';
+import {render} from 'react-dom';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import 'babel-polyfill';
+import {Qxgy, Synopsis,} from './components/pre-load';
 
 if (ENV.debug) {
     render((
         <Router history={browserHistory}>
-            <Route path="/" component={MathRobot}>
-                <IndexRoute component={Content}/>
-                <Route path="/test" component={Test}/>
-                <Route path="/doc" component={Doc}/>
+            <Route path="/" component={Qxgy}>
+                <IndexRoute component={Synopsis}/>
             </Route>
         </Router>
     ), document.getElementById('qxgy'));
 }
 else {
-    render(<div>hello world</div>, document.getElementById('qxgy'));
+    render(<Qxgy/>, document.getElementById('qxgy'));
 }

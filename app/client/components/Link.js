@@ -10,17 +10,13 @@ import {propTypes, defaultProps} from './types';
 import {Link as A} from 'react-router';
 
 class Link extends Component {
-    init({active}) {
-        return {active,}
-    }
-    
-    run({children, style, color,}, {active,}) {
+    _run({children, style, color, active,}) {
         return (
             <A {...this.props} style={{
-                ...style,
                 textDecoration: 'none',
                 color,
                 filter: `brightness(${active ? 200 : 100}%)`,
+                ...style,
             }}/>
         );
     }
