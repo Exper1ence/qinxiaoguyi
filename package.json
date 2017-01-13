@@ -23,8 +23,8 @@
     "webpack-merge": "^2.0.0"
   },
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "debug": "webpack --watch"
+    "b": "webpack",
+    "d": "webpack --watch",
+    "s": "webpack --watch"
   }
 }

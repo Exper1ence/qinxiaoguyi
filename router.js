@@ -18,8 +18,8 @@ module.exports = {
             cb(req.body, res, next);
         });
     },
-    static(path){
-        app.use(Express.static(path));
+    static(path, options){
+        app.use(Express.static(path, options));
     },
     start(port){
         port = process.env.PORT || port;

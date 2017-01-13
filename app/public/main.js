@@ -60,6 +60,10 @@
 
 	__webpack_require__(290);
 
+	var _ENV = __webpack_require__(586);
+
+	var _ENV2 = _interopRequireDefault(_ENV);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
@@ -73,15 +77,15 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var DEBUG = true;
+	window.ENV = _ENV2.default;
 
 	var MathRobot = function (_Component) {
 	    _inherits(MathRobot, _Component);
 
-	    function MathRobot(props) {
+	    function MathRobot() {
 	        _classCallCheck(this, MathRobot);
 
-	        return _possibleConstructorReturn(this, (MathRobot.__proto__ || Object.getPrototypeOf(MathRobot)).call(this, props));
+	        return _possibleConstructorReturn(this, (MathRobot.__proto__ || Object.getPrototypeOf(MathRobot)).apply(this, arguments));
 	    }
 
 	    _createClass(MathRobot, [{
@@ -92,7 +96,7 @@
 	        value: function run(_ref) {
 	            var children = _ref.children;
 
-	            if (DEBUG) {
+	            if (_ENV2.default.debug) {
 	                return _react2.default.createElement(
 	                    'div',
 	                    { style: { width: '500px', height: '500px', backgroundColor: 'blue' } },
@@ -140,7 +144,7 @@
 
 	            _objectDestructuringEmpty(_ref2);
 
-	            if (DEBUG) {
+	            if (_ENV2.default.debug) {
 	                return _react2.default.createElement(_components.Container, { children: 'hehe' });
 	            } else {
 	                return _react2.default.createElement(_components.Container, {
@@ -55263,6 +55267,19 @@
 	  return function(it){
 	    return String(it).replace(regExp, replacer);
 	  };
+	};
+
+/***/ },
+/* 586 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	                value: true
+	});
+	exports.default = {
+	                debug: false
 	};
 
 /***/ }

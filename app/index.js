@@ -4,13 +4,5 @@
 const Path = require('path');
 
 module.exports = function mathRobot(router) {
-    router.static(Path.resolve(__dirname, './public'));
-    router.get((res, next) => {
-        if(ENV.DEBUG){
-            res.sendFile(Path.resolve(__dirname, './public/debug.html'));
-        }
-        else{
-            res.sendFile(Path.resolve(__dirname, './public/index.html'));
-        }
-    });
+    router.static(Path.resolve(__dirname, './public'), {index: ENV.debug ? 'debug.html' : 'index.html'});
 };

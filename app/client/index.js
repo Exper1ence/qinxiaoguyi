@@ -11,20 +11,17 @@ import {
 } from './components';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import 'babel-polyfill';
+import ENV from './ENV';
+window.ENV = ENV;
 
-const DEBUG = true;
 class MathRobot extends Component {
-    constructor(props) {
-        super(props);
-    }
-    
     componentDidMount() {
     }
     
     run({children,}) {
-        if(DEBUG){
-            return(
-                <div style={{width:'500px',height:'500px',backgroundColor:'blue'}}>test</div>
+        if (ENV.debug) {
+            return (
+                <div style={{width: '500px', height: '500px', backgroundColor: 'blue'}}>test</div>
             )
         }
         return (
@@ -46,7 +43,7 @@ class Content extends Component {
     }
     
     run({}, {bottom, transition,}) {
-        if (DEBUG) {
+        if (ENV.debug) {
             return (
                 <Container children={'hehe'}/>
             )

@@ -1,10 +1,8 @@
 /**
  * Created by Exper1ence on 2017/1/2.
  */
-ENV = {
-    DEBUG: false,
-};
+global.ENV = require('./ENV');
 const router = require('./router');
 //asd
 require('./app')(router);
-router.start(ENV.DEBUG ? 3000 : 80);
+router.start(ENV.debug ? 3000 : 80);
