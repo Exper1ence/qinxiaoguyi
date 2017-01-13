@@ -10,7 +10,7 @@ const https = require('https');
 module.exports = {
     get(cb){
         router.get('*', (req, res, next) => {
-            cb(res, next);
+            cb({req, res, next});
         })
     },
     post(cb){
