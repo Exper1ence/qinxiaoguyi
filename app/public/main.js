@@ -98,16 +98,17 @@
 
 	            if (_ENV2.default.debug) {
 	                return _react2.default.createElement(
+	                    _components.Wrapper,
+	                    { style: {} },
+	                    children
+	                );
+	            } else {
+	                return _react2.default.createElement(
 	                    'div',
-	                    { style: { width: '500px', height: '500px', backgroundColor: 'blue' } },
+	                    { style: { height: '100%', backgroundColor: 'blue' } },
 	                    'test'
 	                );
 	            }
-	            return _react2.default.createElement(
-	                _components.Wrapper,
-	                { style: {} },
-	                children
-	            );
 	        }
 	    }]);
 
@@ -225,20 +226,22 @@
 
 	    return Doc;
 	}(_components.Component);
-	// render(<MathRobot/>, document.getElementById('math-robot'));
 
-
-	(0, _reactDom.render)(_react2.default.createElement(
-	    _reactRouter.Router,
-	    { history: _reactRouter.browserHistory },
-	    _react2.default.createElement(
-	        _reactRouter.Route,
-	        { path: '/', component: MathRobot },
-	        _react2.default.createElement(_reactRouter.IndexRoute, { component: Content }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/test', component: Test }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/doc', component: Doc })
-	    )
-	), document.getElementById('qxgy'));
+	if (_ENV2.default.debug) {
+	    (0, _reactDom.render)(_react2.default.createElement(
+	        _reactRouter.Router,
+	        { history: _reactRouter.browserHistory },
+	        _react2.default.createElement(
+	            _reactRouter.Route,
+	            { path: '/', component: MathRobot },
+	            _react2.default.createElement(_reactRouter.IndexRoute, { component: Content }),
+	            _react2.default.createElement(_reactRouter.Route, { path: '/test', component: Test }),
+	            _react2.default.createElement(_reactRouter.Route, { path: '/doc', component: Doc })
+	        )
+	    ), document.getElementById('qxgy'));
+	} else {
+	    (0, _reactDom.render)(_react2.default.createElement(MathRobot, null), document.getElementById('qxgy'));
+	}
 
 /***/ },
 /* 1 */

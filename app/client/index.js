@@ -21,14 +21,16 @@ class MathRobot extends Component {
     run({children,}) {
         if (ENV.debug) {
             return (
-                <div style={{width: '500px', height: '500px', backgroundColor: 'blue'}}>test</div>
+                <Wrapper style={{}}>
+                    {children}
+                </Wrapper>
             )
         }
-        return (
-            <Wrapper style={{}}>
-                {children}
-            </Wrapper>
-        )
+        else {
+            return (
+                <div style={{height: '100%', backgroundColor: 'blue'}}>test</div>
+            )
+        }
     }
 }
 class Content extends Component {
@@ -92,13 +94,18 @@ class Doc extends Component {
         )
     }
 }
-// render(<MathRobot/>, document.getElementById('math-robot'));
-render((
-    <Router history={browserHistory}>
-        <Route path="/" component={MathRobot}>
-            <IndexRoute component={Content}/>
-            <Route path="/test" component={Test}/>
-            <Route path="/doc" component={Doc}/>
-        </Route>
-    </Router>
-), document.getElementById('qxgy'));
+
+if (ENV.debug) {
+    render((
+        <Router history={browserHistory}>
+            <Route path="/" component={MathRobot}>
+                <IndexRoute component={Content}/>
+                <Route path="/test" component={Test}/>
+                <Route path="/doc" component={Doc}/>
+            </Route>
+        </Router>
+    ), document.getElementById('qxgy'));
+}
+else {
+    render(<MathRobot/>, document.getElementById('qxgy'));
+}
