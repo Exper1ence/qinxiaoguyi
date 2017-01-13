@@ -107,5 +107,5 @@ if (ENV.debug) {
     ), document.getElementById('qxgy'));
 }
 else {
-    render(<MathRobot/>, document.getElementById('qxgy'));
+    render(<div>hello world</div>, document.getElementById('qxgy'));
 }

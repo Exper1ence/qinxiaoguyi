@@ -240,7 +240,11 @@
 	        )
 	    ), document.getElementById('qxgy'));
 	} else {
-	    (0, _reactDom.render)(_react2.default.createElement(MathRobot, null), document.getElementById('qxgy'));
+	    (0, _reactDom.render)(_react2.default.createElement(
+	        'div',
+	        null,
+	        'hello world'
+	    ), document.getElementById('qxgy'));
 	}
 
 /***/ },
