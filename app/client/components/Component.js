@@ -18,7 +18,7 @@ export default class Component extends Base {
     }
     
     componentDidMount() {
-        setImmediate(() => this._onParentLateUpdate
+        requestAnimationFrame(() => this._onParentLateUpdate
         && this._onParentLateUpdate.call(this, this.props, this.state, this));
     }
     

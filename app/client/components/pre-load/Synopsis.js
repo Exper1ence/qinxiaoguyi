@@ -73,7 +73,7 @@ class Synopsis extends Component {
                         />
                     ),
                 });
-            }, 2000);
+            }, 1000);
         });
         return {
             state: {content: null}
