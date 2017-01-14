@@ -3,14 +3,16 @@
  */
 import React from 'react';
 import Component from './Component';
-import Container from './Container';
+import View from './View';
 
 export default class Text extends Component {
     _run({children, style,}) {
         return (
-            <Container style={{...style}}>
+            <View style={{
+                ...style,
+            }}>
                 {children}
-            </Container>
+            </View>
         )
     }
 };

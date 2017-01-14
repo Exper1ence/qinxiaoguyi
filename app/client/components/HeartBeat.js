@@ -3,50 +3,38 @@
  */
 import React, {PropTypes} from 'react';
 import Component from './Component';
-import Container from './Container';
 import View from './View';
 import {propTypes, defaultProps} from './types';
-import util from './util';
+import Transition from './Transition';
 
 class HeartBeat extends Component {
     _init() {
         return {
-            _dir: -1,
+            state: {
+                dir: 1,
+            }
         }
     }
     
-    componentDidMount() {
-        this._id = util.setInterval(() => {
-            const {_dir, element}=this;
-            if (_dir > 0) {
-                element.style.width = '150px';
-                element.style.height = '150px';
-            }
-            else {
-                element.style.width = '50px';
-                element.style.height = '50px';
-            }
-            this._dir = -_dir;
-        }, 500);
-    }
-    
-    stop() {
-        util.clearInterval(this._id);
-    }
-    
-    _run({children, style,}) {
+    _run({run,}, {dir,}) {
         return (
-            <View
+            <Transition
                 style={{
-                    height: '150px',
-                    width: '150px',
+                    width: '50px',
+                    height: '50px',
                     borderRadius: '75px',
                     backgroundColor: '#e7f7f5',
                     transition: 'height .5s ease,width .5s ease',
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}
-                ref={view => this.element = view.element}
+                to={dir > 0 ? {width: '50px', height: '50px',} : {width: '150px', height: '150px'}}
+                done={() => {
+                    if (run) {
+                        this.setState({dir: -dir});
+                    }
+                }}
+                duration={.5}
                 children={(
                     <View
                         style={{

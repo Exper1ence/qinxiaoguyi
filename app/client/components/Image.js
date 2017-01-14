@@ -8,9 +8,15 @@ import View from './View';
 import {propTypes, defaultProps} from './types';
 
 class Image extends Component {
-    _run({children, style,}) {
+    _run({style, src,...rest}) {
         return (
-            <img {...this.props}/>
+            <View
+                {...rest}
+                style={{
+                ...style,
+                backgroundImage: `url(${src})`,
+                backgroundSize:'cover',
+            }}/>
         );
     }
 }

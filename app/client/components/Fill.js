@@ -8,16 +8,15 @@ import View from './View';
 import {propTypes, defaultProps} from './types';
 
 class Fill extends Component {
-    _run({children, style, h, v,}) {
+    _run({style, h, v, ...rest}) {
         return (
             <View
+                {...rest}
                 style={{
                     width: h ? '100%' : 'auto',
                     height: v ? '100%' : 'auto',
                     ...style,
                 }}
-                children={children}
-                ref={view => this.element = view.element}
             />
         );
     }

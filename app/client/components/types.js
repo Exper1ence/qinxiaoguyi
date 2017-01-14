@@ -2,6 +2,7 @@
  * Created by Exper1ence on 2017/1/1.
  */
 import {PropTypes} from 'react';
+import View from './View';
 
 export const propTypes = {
     direction: {
@@ -20,7 +21,10 @@ export const propTypes = {
         small: PropTypes.bool,
         normal: PropTypes.bool,
         large: PropTypes.bool,
-    }
+    },
+    component: {
+        component: PropTypes.func,
+    },
 };
 
 export const defaultProps = {
@@ -32,5 +36,8 @@ export const defaultProps = {
     },
     size: {
         normal: true,
-    }
+    },
+    component: {
+        component: View,
+    },
 };

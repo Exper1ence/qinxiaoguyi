@@ -27,70 +27,68 @@ class Draggable extends Component {
     }
     
     _run({
-        children, style,
-        onDragVertical, onDrop, onSwipeUp, onSwipeDown,
+        component, onDragVertical, onDrop, onSwipeUp, onSwipeDown,
+        ...rest
     }) {
-        return (
-            <View style={{...style,}}
-                  onTouchStart={(e) => {
-                      this._last = e.targetTouches[0];
-                  }}
-                  onTouchEnd={(e) => {
-                      switch (this._dir) {
-                          case 2:
-                              onSwipeUp(e);
-                              break;
-                          case 3:
-                              onSwipeDown(e);
-                              break;
-                      }
-                      this._dir = -1;
-                      onDrop(e);
-                  }}
-                  onTouchMove={(e) => {
-                      const newTouch = e.targetTouches[0];
-                      const {_last, _dir,}=this;
-                      const {x, y, unitX, unitY,}=this._getVector(_last, newTouch);
-                      let newDir = -1;
-                      if (_dir >= 0) {
-                          if (_dir >= 2) {
-                              if (unitY > 0) {
-                                  newDir = 3;
-                              }
-                              else {
-                                  newDir = 2;
-                              }
-                              onDragVertical(e, y);
-                          }
-                          else {
-                              if (unitX < 0) {
-                                  newDir = 0;
-                              }
-                              else {
-                                  newDir = 1;
-                              }
-                          }
-                      }
-                      else {
-                          if (unitX < -0.5) {
-                              newDir = 0;
-                          }
-                          else if (unitX > 0.5) {
-                              newDir = 1;
-                          }
-                          else if (unitY <= -0.5) {
-                              newDir = 2;
-                          }
-                          else if (unitY >= 0.5) {
-                              newDir = 3;
-                          }
-                      }
-                      this._dir = newDir;
-                      this._last = newTouch;
-                  }}
-                  children={children}
-            />
-        );
+        return React.createElement(component, {
+            ...rest,
+            onTouchStart: (e) => {
+                this._last = e.targetTouches[0];
+            },
+            onTouchMove: (e) => {
+                const newTouch = e.targetTouches[0];
+                const {_last, _dir,}=this;
+                const {x, y, unitX, unitY,}=this._getVector(_last, newTouch);
+                let newDir = -1;
+                if (_dir >= 0) {
+                    if (_dir >= 2) {
+                        if (unitY > 0) {
+                            newDir = 3;
+                        }
+                        else {
+                            newDir = 2;
+                        }
+                        onDragVertical(e, y);
+                    }
+                    else {
+                        if (unitX < 0) {
+                            newDir = 0;
+                        }
+                        else {
+                            newDir = 1;
+                        }
+                    }
+                }
+                else {
+                    if (unitX < -0.5) {
+                        newDir = 0;
+                    }
+                    else if (unitX > 0.5) {
+                        newDir = 1;
+                    }
+                    else if (unitY <= -0.5) {
+                        newDir = 2;
+                    }
+                    else if (unitY >= 0.5) {
+                        newDir = 3;
+                    }
+                }
+                this._dir = newDir;
+                this._last = newTouch;
+            },
+            onTouchEnd: (e) => {
+                switch (this._dir) {
+                    case 2:
+                        onSwipeUp(e);
+                        break;
+                    case 3:
+                        onSwipeDown(e);
+                        break;
+                }
+                this._dir = -1;
+                onDrop(e);
+            }
+        });
     }
 }
 Draggable.propTypes = {
@@ -98,11 +96,13 @@ Draggable.propTypes = {
     onDrop: PropTypes.func,
     onSwipeUp: PropTypes.func,
     onSwipeDown: PropTypes.func,
+    ...PropTypes.component,
 };
 Draggable.defaultProps = {
     onDragVertical: () => null,
     onDrop: () => null,
     onSwipeUp: () => null,
     onSwipeDown: () => null,
+    ...defaultProps.component,
 };
 export default Draggable;

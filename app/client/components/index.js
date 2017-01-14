@@ -13,9 +13,10 @@ import Footer from './Footer';
 import Link from './Link';
 import Draggable from './Draggable';
 import Page from './Page';
+import Iioi from './Iioi';
 
 export {
     Container, Component, Padding,
     Text, Responsive, Button, Navigator, View,
-    Footer, Link, Draggable, Page,
+    Footer, Link, Draggable, Page,Iioi,
 };

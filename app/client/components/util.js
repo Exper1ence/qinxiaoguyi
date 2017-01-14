@@ -30,6 +30,16 @@ export default Object.assign(_, {
         return _.isFunction(func) ? func : () => {
             };
     },
+    setTimeout(func, delay){
+        const id = Timer.getId();
+        setTimeout(() => {
+            if (Timer.isContinued(id)) {
+                func();
+                Timer.clear(id);
+            }
+        }, delay);
+        return id;
+    },
     setInterval(func, interval){
         const id = Timer.getId();
         func();

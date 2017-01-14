@@ -7,6 +7,7 @@ import Container from './Container';
 import View from './View';
 import {propTypes, defaultProps} from './types';
 import Draggable from './Draggable';
+import Fill from './Fill';
 
 class Page extends Component {
     _init() {
@@ -17,11 +18,17 @@ class Page extends Component {
         }
     }
     
-    _run({children, backgroundImage}, {bottom, transition}, {_time}) {
+    _run({backgroundImage, style, ...rest}, {bottom, transition}, {_time}) {
         return (
             <Draggable
+                {...rest}
                 style={{
-                    width: '100%',
+                    position: 'absolute',
+                    bottom,
+                    transition,
+                    height: '100%',
+                    backgroundImage,
+                    ...style,
                 }}
                 onDragVertical={(e, diff) => {
                     const {_bottom}=this;
@@ -38,19 +45,8 @@ class Page extends Component {
                 onSwipeDown={() => {
                     this.setState({bottom: 0, transition: `bottom ${_time}s`});
                 }}
-                children={(
-                    <Container
-                        style={{
-                            color: '#fff',
-                            position: 'absolute',
-                            bottom,
-                            transition,
-                            height: '100%',
-                            backgroundImage,
-                        }}
-                        children={children}
-                    />
-                )}
+                component={Fill}
+                h v
             />
         )
     }

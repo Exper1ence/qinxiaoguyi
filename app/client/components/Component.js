@@ -7,11 +7,33 @@ import _ from './util';
 export default class Component extends Base {
     constructor(props) {
         super(props);
-        Object.assign(this, _.toFunction(this._init).call(this, this.props));
+        Object.assign(this, this._init && this._init.call(this, props));
+        this.state = this.state || {};
+        this._selfUpdate = false;
+    }
+    
+    setState(state) {
+        this._selfUpdate = true;
+        super.setState(state);
+    }
+    
+    componentDidMount() {
+        setImmediate(() => this._onParentLateUpdate
+        && this._onParentLateUpdate.call(this, this.props, this.state, this));
+    }
+    
+    componentDidUpdate() {
+        requestAnimationFrame(() => {
+            if (this._selfUpdate) {
+                this._selfUpdate = false;
+            }
+            else {
+                this._onParentLateUpdate && this._onParentLateUpdate.call(this, this.props, this.state, this);
+            }
+        });
     }
     
     render() {
-        return _.toFunction(this._run)
-            .call(this, _.toPlainObject(this.props), _.toPlainObject(this.state),this);
+        return this._run.call(this, this.props, this.state, this);
     }
 }
