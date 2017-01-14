@@ -7,13 +7,13 @@ import Container from './Container';
 import View from './View';
 import {propTypes, defaultProps} from './types';
 
-class Full extends Component {
-    _run({children, style, width, height,}) {
+class Fill extends Component {
+    _run({children, style, h, v,}) {
         return (
             <View
                 style={{
-                    width: width ? '100%' : 'auto',
-                    height: height ? '100%' : 'auto',
+                    width: h ? '100%' : 'auto',
+                    height: v ? '100%' : 'auto',
                     ...style,
                 }}
                 children={children}
@@ -22,12 +22,12 @@ class Full extends Component {
         );
     }
 }
-Full.propTypes = {
-    width: PropTypes.bool,
-    height: PropTypes.bool,
+Fill.propTypes = {
+    h: PropTypes.bool,
+    v: PropTypes.bool,
 };
-Full.defaultProps = {
-    width: false,
-    height: false,
+Fill.defaultProps = {
+    h: false,
+    v: false,
 };
-export default Full;
+export default Fill;

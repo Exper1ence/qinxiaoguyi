@@ -34476,9 +34476,9 @@
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _Full = __webpack_require__(575);
+	var _Fill = __webpack_require__(575);
 
-	var _Full2 = _interopRequireDefault(_Full);
+	var _Fill2 = _interopRequireDefault(_Fill);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34510,8 +34510,8 @@
 	                    _reactRedux.Provider,
 	                    { store: _store2.default, style: { height: '100%' } },
 	                    _react2.default.createElement(
-	                        _Full2.default,
-	                        { width: true, height: true },
+	                        _Fill2.default,
+	                        { h: true, v: true },
 	                        children
 	                    )
 	                );
@@ -54029,29 +54029,29 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var Full = function (_Component) {
-	    _inherits(Full, _Component);
+	var Fill = function (_Component) {
+	    _inherits(Fill, _Component);
 
-	    function Full() {
-	        _classCallCheck(this, Full);
+	    function Fill() {
+	        _classCallCheck(this, Fill);
 
-	        return _possibleConstructorReturn(this, (Full.__proto__ || Object.getPrototypeOf(Full)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Fill.__proto__ || Object.getPrototypeOf(Fill)).apply(this, arguments));
 	    }
 
-	    _createClass(Full, [{
+	    _createClass(Fill, [{
 	        key: '_run',
 	        value: function _run(_ref) {
 	            var _this2 = this;
 
 	            var children = _ref.children,
 	                style = _ref.style,
-	                width = _ref.width,
-	                height = _ref.height;
+	                h = _ref.h,
+	                v = _ref.v;
 
 	            return _react2.default.createElement(_View2.default, {
 	                style: _extends({
-	                    width: width ? '100%' : 'auto',
-	                    height: height ? '100%' : 'auto'
+	                    width: h ? '100%' : 'auto',
+	                    height: v ? '100%' : 'auto'
 	                }, style),
 	                children: children,
 	                ref: function ref(view) {
@@ -54061,18 +54061,18 @@
 	        }
 	    }]);
 
-	    return Full;
+	    return Fill;
 	}(_Component3.default);
 
-	Full.propTypes = {
-	    width: _react.PropTypes.bool,
-	    height: _react.PropTypes.bool
+	Fill.propTypes = {
+	    h: _react.PropTypes.bool,
+	    v: _react.PropTypes.bool
 	};
-	Full.defaultProps = {
-	    width: false,
-	    height: false
+	Fill.defaultProps = {
+	    h: false,
+	    v: false
 	};
-	exports.default = Full;
+	exports.default = Fill;
 
 /***/ },
 /* 576 */
@@ -54468,15 +54468,15 @@
 
 	var _Component4 = _interopRequireDefault(_Component3);
 
-	var _Full = __webpack_require__(575);
+	var _Fill = __webpack_require__(575);
 
-	var _Full2 = _interopRequireDefault(_Full);
+	var _Fill2 = _interopRequireDefault(_Fill);
 
-	var _HeartBeat = __webpack_require__(592);
+	var _HeartBeat = __webpack_require__(580);
 
 	var _HeartBeat2 = _interopRequireDefault(_HeartBeat);
 
-	var _Arrow = __webpack_require__(593);
+	var _Arrow = __webpack_require__(581);
 
 	var _Arrow2 = _interopRequireDefault(_Arrow);
 
@@ -54510,11 +54510,11 @@
 	            var onLoad = _ref.onLoad;
 
 	            __webpack_require__.e/* nsure */(1, function () {
-	                var Page = __webpack_require__(590).default;
+	                var Page = __webpack_require__(594).default;
 	                setTimeout(function () {
 	                    _this2.setState({
 	                        content: _react2.default.createElement(Page, {
-	                            backgroundImage: 'url(' + __webpack_require__(591) + ')',
+	                            backgroundImage: 'url(' + __webpack_require__(595) + ')',
 	                            children: _react2.default.createElement(_Arrow2.default, null)
 	                        })
 	                    });
@@ -54563,9 +54563,9 @@
 	            var _this4 = this;
 
 	            return _react2.default.createElement(
-	                _Full2.default,
-	                { width: true },
-	                _react2.default.createElement(_Full2.default, { width: true, height: true,
+	                _Fill2.default,
+	                { h: true },
+	                _react2.default.createElement(_Fill2.default, { h: true, v: true,
 	                    style: {
 	                        backgroundColor: 'white',
 	                        transition: 'opacity .5s ease',
@@ -54596,19 +54596,7 @@
 	exports.default = Synopsis;
 
 /***/ },
-/* 580 */,
-/* 581 */,
-/* 582 */,
-/* 583 */,
-/* 584 */,
-/* 585 */,
-/* 586 */,
-/* 587 */,
-/* 588 */,
-/* 589 */,
-/* 590 */,
-/* 591 */,
-/* 592 */
+/* 580 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54733,7 +54721,7 @@
 	exports.default = HeartBeat;
 
 /***/ },
-/* 593 */
+/* 581 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54758,7 +54746,7 @@
 
 	var _types = __webpack_require__(578);
 
-	var _Image = __webpack_require__(594);
+	var _Image = __webpack_require__(582);
 
 	var _Image2 = _interopRequireDefault(_Image);
 
@@ -54798,7 +54786,7 @@
 	                style = _ref2.style;
 
 	            return _react2.default.createElement(_Image2.default, {
-	                src: __webpack_require__(595)
+	                src: __webpack_require__(583)
 	            });
 	        }
 	    }]);
@@ -54811,7 +54799,7 @@
 	exports.default = Arrow;
 
 /***/ },
-/* 594 */
+/* 582 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -54878,7 +54866,7 @@
 	exports.default = Image;
 
 /***/ },
-/* 595 */
+/* 583 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAAkCAMAAADip6m2AAAAolBMVEUAAAAAAAAAAAAAAAAAAAABAQEAAAAAAAAHBwcAAAD////9/f37+/vt7e25ubn39/cKCgrz8/Pe3t7c3Nz+/v729vbW1tZra2tKSkoAAABpaWlgYGD9/f38/Pz5+fn5+fn39/fz8/Px8fHu7u7q6urm5ubj4+Pd3d3y8vLX19fJycnAwMC4uLisrKyhoaGVlZWGhoajo6MpKSkxMTGAgID///9oDYyzAAAANXRSTlMAAwcLFR0SGRAO+efJbSOcIqBDQvLNbTEpGxEQ9e3h29XDvLOsnJOJiIFpYVlNRkE7MiwfDLl52bwAAAGFSURBVEjH3ZXZboMwFERbHAMhC6EFQtrs+777/3+t98bGjmwqy32plHmLPYfMiYTy9nJ5F/kb693j+O4h7Y567SZjzbYHuDv72WCQxgfSjixpReyRqEWAdmK/YyaTfAHtpivjIo6TUReTZYxxcZzupju/XufP4g660aYD2USmuF13sKeP7Ae6uF13fKZBDRLQ81gTt+rOCmD9MPSBLmaauEV3hWidQOqIr57FLbrpDllCPAghSO9SU7xad3QCNiRQgwAeAn0a6eLVutOC4mRk+SCcToupIW7qsmWnByw25B3Svc6SaeKGbn9LA8UqGsW3fVMc2VJ3eJS6apcUPw5LcVmAq1J30qWBL1mN9gPanZTiUBE3pe5C6cpo4gtRjXkJjtf8cbnSlTHEcz5yTTwBh00UOVToVogfGvibhQq+pCyr0q0Wz1h6kTDsyZObPvn36bckh6qA8YE1eIUEa6GxyyeKEzhC1MLy6byL3yNP4BNn7TSWVRffHYHaI7qq7PB3qMr/mh8s20b2bOZlXQAAAABJRU5ErkJggg=="

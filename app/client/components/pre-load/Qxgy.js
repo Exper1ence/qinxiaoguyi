@@ -6,16 +6,16 @@ import View from '../View';
 import Component from '../Component';
 import {Provider} from 'react-redux';
 import store from './store';
-import Full from '../Full';
+import Fill from '../Fill';
 
 class Qxgy extends Component {
     _run({children,}) {
         if (ENV.debug) {
             return (
                 <Provider store={store} style={{height: '100%'}}>
-                    <Full width height>
+                    <Fill h v>
                         {children}
-                    </Full>
+                    </Fill>
                 </Provider>
             )
         }

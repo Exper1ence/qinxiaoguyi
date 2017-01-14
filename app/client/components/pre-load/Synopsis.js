@@ -3,7 +3,7 @@
  */
 import React, {PropTypes} from 'react';
 import Component from '../Component';
-import Full from '../Full';
+import Fill from '../Fill';
 import HeartBeat from '../HeartBeat';
 import Arrow from '../Arrow';
 
@@ -42,8 +42,8 @@ Lazy.defaultProps = {
 class Synopsis extends Component {
     _run() {
         return (
-            <Full width>
-                <Full width height
+            <Fill h>
+                <Fill h v
                       style={{
                           backgroundColor: 'white',
                           transition: 'opacity .5s ease',
@@ -62,7 +62,7 @@ class Synopsis extends Component {
                         this.refs.beat.stop();
                     }, 1000);
                 }}/>
-            </Full>
+            </Fill>
         )
     }
 }
