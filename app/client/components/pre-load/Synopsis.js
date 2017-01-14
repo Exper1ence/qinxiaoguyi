@@ -64,7 +64,7 @@ class Synopsis extends Component {
                                         transition:'opacity .5s ease-in'
                                     }}
                                     to={{opacity:1}}
-                                    delay={3}
+                                    delay={3.5}
                                     duration={.5}
                                     component={Text}
                                     children='招生简章'
@@ -107,11 +107,3 @@ class Synopsis extends Component {
 Synopsis.propTypes = {};
 Synopsis.defaultProps = {};
 export default Synopsis;
-
-// {/*< Lazy onLoad={() => {*/}
-//     {/*this.refs.curtain.element.style.opacity = 0;*/}
-//     {/*util.setTimeout(() => {*/}
-//         {/*this.refs.curtain.element.style.display = 'none';*/}
-//         {/*this.refs.beat.stop();*/}
-//     {/*}, 500);*/}
-// {/*}}/>*/}
