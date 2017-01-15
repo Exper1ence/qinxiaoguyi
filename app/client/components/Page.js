@@ -26,7 +26,6 @@ class Page extends Component {
                     position: 'absolute',
                     bottom,
                     transition,
-                    height: '100%',
                     backgroundImage,
                     ...style,
                 }}

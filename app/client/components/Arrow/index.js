@@ -8,27 +8,30 @@ import {propTypes, defaultProps} from '../types';
 import Image from '../Image';
 import Transition from '../Transition';
 
+
 class Arrow extends Component {
     _init({}) {
         return {
-            state: {dir: 1}
+            state: {
+                flag: false
+            }
         }
     }
     
-    _run({children, style,}, {dir}) {
+    _run({children, style,}, {flag}) {
         return (
             <Transition
                 style={{
                     position: 'fixed',
-                    bottom: '10px',
-                    width: '40px',
-                    height: '24px',
+                    bottom: 10,
+                    width: 40,
+                    height: 24,
                     left: '50%',
-                    marginLeft: '-20px',
+                    marginLeft: -20,
                     transition: 'bottom .5s ease',
                 }}
-                to={dir > 0 ? {bottom: '10px'} : {bottom: '30px'}}
-                done={() => this.setState({dir: -dir})}
+                to={flag ? {bottom: 10} : {bottom: 30}}
+                done={() => this.setState({flag: !flag})}
                 duration={.5}
                 src={require('./arrow.png')}
                 component={Image}

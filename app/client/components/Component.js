@@ -17,12 +17,12 @@ export default class Component extends Base {
         super.setState(state);
     }
     
-    componentDidMount() {
+    componentWillMount() {
         requestAnimationFrame(() => this._onParentLateUpdate
         && this._onParentLateUpdate.call(this, this.props, this.state, this));
     }
     
-    componentDidUpdate() {
+    componentWillUpdate() {
         requestAnimationFrame(() => {
             if (this._selfUpdate) {
                 this._selfUpdate = false;
@@ -30,6 +30,7 @@ export default class Component extends Base {
             else {
                 this._onParentLateUpdate && this._onParentLateUpdate.call(this, this.props, this.state, this);
             }
+            this._onLateUpdate && this._onLateUpdate.call(this, this.props, this.state, this);
         });
     }
     
