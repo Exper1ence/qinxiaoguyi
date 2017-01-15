@@ -52001,12 +52001,10 @@
 	            }, style),
 	            phases: {
 	                0: {
-	                    width: 50,
-	                    height: 50
+	                    transform: 'scale(1)'
 	                },
 	                100: {
-	                    width: 150,
-	                    height: 150
+	                    transform: 'scale(3)'
 	                }
 	            },
 	            duration: 500
