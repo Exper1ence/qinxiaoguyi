@@ -5,7 +5,7 @@ import React, {PropTypes} from 'react';
 import View from './View';
 import {propTypes, defaultProps} from './types';
 import createClass from './createClass';
-import _ from './util';
+import {forOwn} from './util';
 
 class Timer {
     get isUp() {
@@ -30,14 +30,14 @@ export default createClass({
         const _pIndexes = [];
         if (count > 0) {
             let transition = '';
-            _.forOwn(phases[0], (v, k) => {
+            forOwn(phases[0], (k, v) => {
                 transition += `,${k} ${duration / 1000}s ${timing}`;
             });
             style = {
                 ...style,
                 transition: transition.slice(1),
             };
-            _.forOwn(phases, (v, k) => _pIndexes.push(k));
+            forOwn(phases, (k, v) => _pIndexes.push(k));
             if (delay > 0) {
                 
             }

@@ -4,21 +4,16 @@
 /**
  * Created by Exper1ence on 2016/12/31.
  */
-import _ from 'lodash';
-export default Object.assign(_, {
-    tryFunction(func, ...params){
-        if (_.isFunction(func)) {
-            return func();
-        }
-    },
-    ifFunction(func, callback){
-        if (_.isFunction(func)) {
-            return callback(func);
-        }
-    },
-    ifPlainObject(obj, callback){
-        if (_.isPlainObject(obj)) {
-            return callback(obj);
+export const func = function (func) {
+    return typeof func == 'function';
+};
+export const plain = function (obj) {
+    return typeof  obj == 'object';
+};
+export const forOwn = function (obj, callback) {
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            callback(key, obj[key]);
         }
     }
-});
+};

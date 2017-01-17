@@ -22,12 +22,17 @@ const common = {
     module: {
         loaders: [
             {
-                test: /.jsx?$/,
+                test: /.js$/,
                 loader: 'babel',
                 exclude: /node_modules/,
                 query: {
-                    presets: ['es2015', 'react'],
-                    plugins: ["transform-object-rest-spread"]
+                    presets: ['es2015', 'es2016','react'],
+                    plugins: [
+                        'transform-runtime',
+                        'transform-decorators-legacy',
+                        'transform-class-properties',
+                        'transform-object-rest-spread',
+                    ]
                 }
             },
             {
@@ -75,7 +80,7 @@ switch (process.env.npm_lifecycle_event) {
         break;
     case 's':
         config = merge(common, {
-            devtool: '#inline-source-map',
+            devtool: 'source-map',
             // devtool: 'cheap-eval-source-map',
             debug: true,
         });

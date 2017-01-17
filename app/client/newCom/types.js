@@ -3,7 +3,6 @@
  */
 import {PropTypes} from 'react';
 import View from './View';
-console.log(View)
 export const propTypes = {
     direction: {
         horizontal: PropTypes.bool,

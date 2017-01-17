@@ -11,13 +11,11 @@ export default createClass({
     
     render({style, ...rest}, {}, {}) {
         return (
-            <div
+            <span
                 {...rest}
                 style={{
                     display: 'flex',
-                    flexWrap: 'wrap',
                     boxSizing: 'border-box',
-                    alignItems: 'flex-start',
                     ...style,
                 }}
             />

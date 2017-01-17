@@ -2,22 +2,12 @@
  * Created by Exper1ence on 2017/1/15.
  */
 import ReactUpdates  from 'react-dom/lib/ReactUpdates';
-import ReactDom from 'react-dom';
-let count = 0;
-const RFU = {
-    _updates: [],
-    initialize(){
-        requestAnimationFrame(this._tick.bind(this));
-    },
-    add(update){
-        this._updates.push(update);
-    },
-    _tick(){
-        ReactUpdates.flushBatchedUpdates();
-        requestAnimationFrame(this._tick.bind(this));
-        this._updates.forEach(update => update());
-    }
-};
+const updates = [];
+function tick() {
+    ReactUpdates.flushBatchedUpdates();
+    updates.forEach(update => update());
+    requestAnimationFrame(tick);
+}
 ReactUpdates.injection.injectBatchingStrategy({
     isBatchingUpdates: false,
     batchedUpdates: function (callback, ...param) {
@@ -32,5 +22,7 @@ ReactUpdates.injection.injectBatchingStrategy({
         this.isBatchingUpdates = false;
     }
 });
-RFU.initialize();
-export default RFU;
+requestAnimationFrame(tick);
+export default function (update) {
+    updates.push(update);
+};
