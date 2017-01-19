@@ -4,7 +4,7 @@
 const Path = require('path');
 
 module.exports = function mathRobot(router) {
-    router.static(Path.resolve(__dirname, './public'), {index: ENV.debug ? 'debug.html' : 'index.html'});
+    router.static(Path.resolve(__dirname, './public'));
     router.get(({res, req}) => {
         res.send('不存在！');
         console.log(req.url);

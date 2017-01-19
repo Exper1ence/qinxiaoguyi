@@ -7754,7 +7754,9 @@ var Loading = function (_Component) {
             name: 'full-size center-center loading'
         };
         __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 306)).then(function (components) {
-            props.render(components);
+            setTimeout(function () {
+                return props.render(components);
+            }, 2000);
         }).catch(function (e) {
             return console.log(e);
         });

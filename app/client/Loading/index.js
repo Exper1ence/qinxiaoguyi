@@ -11,10 +11,11 @@ export default class Loading extends Component {
         };
         System.import('../components')
             .then((components) => {
-                props.render(components);
+                setTimeout(() => props.render(components), 2000);
             })
             .catch(e => console.log(e));
     }
+    
     hide() {
         this.setState(({name}) => {
             return {name: name + ' loading-hide'}
