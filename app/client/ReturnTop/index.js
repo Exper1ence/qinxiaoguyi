@@ -6,9 +6,9 @@ import Timer from '../Timer';
 
 @ReactTimeout
 export default class ReturnTop extends Component {
-    awake({handleScroll}) {
+    awake() {
         const body = document.body;
-        document.addEventListener('scroll', handleScroll);
+        document.addEventListener('scroll', this.handleScroll);
         return {
             state: {
                 name: 'return-top-hide',

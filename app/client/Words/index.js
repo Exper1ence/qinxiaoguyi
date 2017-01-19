@@ -88,6 +88,7 @@ export default class Words extends Component {
                                      ...style,
                                      height: 100,
                                      width: 100,
+                                     fontSize:20,
                                  }}
                             >
                                 招生简章</div>
