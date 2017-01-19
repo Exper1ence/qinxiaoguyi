@@ -1,0 +1,25 @@
+{
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ],
+    // webpack understands the native import syntax, and uses it for tree shaking
+    "es2016",
+    "react"
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    [
+      "transform-react-jsx",
+      {
+        "pragma": "Component.createElement"
+      }
+    ]
+  ]
+}

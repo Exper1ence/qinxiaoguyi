@@ -5,87 +5,84 @@ const Path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const Fs = require('fs');
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PATHS = {
-    app: Path.resolve(__dirname, 'app/client/index.js'),
-    build: Path.resolve(__dirname, 'app/public'),
-    clientEnv: Path.resolve(__dirname, './app/client/ENV.js'),
-    serverEnv: Path.resolve(__dirname, './ENV.js'),
+    entry: Path.resolve(__dirname, 'app/client'),
+    bundle: Path.resolve(__dirname, 'app/public'),
 };
-
-const common = {
-    entry: PATHS.app,
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+let config = {
+    context: PATHS.entry,
+    entry: './index.js',
     output: {
-        path: PATHS.build,
-        filename: '[name].js',
+        path: PATHS.bundle,
+        filename: 'bundle.js',
     },
     module: {
-        loaders: [
+        rules: [
             {
-                test: /.js$/,
-                loader: 'babel',
+                test: /\.js$/,
                 exclude: /node_modules/,
-                query: {
-                    presets: ['es2015', 'es2016','react'],
-                    plugins: [
-                        'transform-runtime',
-                        'transform-decorators-legacy',
-                        'transform-class-properties',
-                        'transform-object-rest-spread',
-                    ]
-                }
+                loader: 'babel-loader',
+            },
+            {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                loader: ExtractTextPlugin.extract('css-loader!sass-loader')
             },
             {
                 test: /\.(png|jpg)$/,
-                loader: 'file',
-            },
+                exclude: /node_modules/,
+                loader: 'file-loader',
+            }
         ]
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template:'template.html',
+        }),
+        new ExtractTextPlugin({filename: 'bundle.css', disable: false, allChunks: true})
+    ],
+    stats: "minimal"
 };
-let config;
-
-Fs.writeFileSync(PATHS.clientEnv,
-    `export default {
-        debug: true,
-     };`);
-Fs.writeFileSync(PATHS.serverEnv,
-    `module.exports = {
-        debug: true,
-     };`);
-switch (process.env.npm_lifecycle_event) {
-    case 'b':
-        config = merge(common, {
-            // devtool: 'source-map'
-            plugins: [
-                new webpack.DefinePlugin({
-                    'process.env': {
-                        NODE_ENV: JSON.stringify('production')
-                    }
-                }),
-                new webpack.optimize.UglifyJsPlugin({
-                    compress: {
-                        warnings: false
-                    }
-                }),
-            ]
+const c = process.env.npm_lifecycle_event;
+if (c == 'b') {
+    config = merge(config, {
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    NODE_ENV: JSON.stringify('production')
+                }
+            }),
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false
+                }
+            }),
+        ]
+    });
+}
+else {
+    if (c == 's') {
+        config = merge(config, {
+            devtool: 'source-map"',
         });
-        Fs.writeFileSync(PATHS.clientEnv,
-            `export default {
-                debug: false,
-            };`);
-        Fs.writeFileSync(PATHS.serverEnv,
-            `module.exports = {
-                debug: false,
-            };`);
-        break;
-    case 's':
-        config = merge(common, {
-            devtool: 'source-map',
-            // devtool: 'cheap-eval-source-map',
-            debug: true,
-        });
-        break;
-    default:
-        config = merge(common, {});
+    }
+    config = Object.assign(config, {
+        devServer: {
+            contentBase: PATHS.bundle,
+            compress: true,
+            port: 8080,
+            watchOptions: {
+                poll: true
+            },
+            clientLogLevel: "none",
+            noInfo: true,
+        },
+        performance: {
+            hints: false
+        }
+    })
 }
 module.exports = config;

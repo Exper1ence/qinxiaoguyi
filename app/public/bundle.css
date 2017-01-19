@@ -1,0 +1,150 @@
+.full-size {
+  width: 100%;
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
+.test-size {
+  width: 200px;
+  height: 200px; }
+
+.red {
+  background-color: red; }
+.center-center {
+  justify-content: center;
+  align-items: center; }
+
+.jcct {
+  justify-content: center; }
+
+.aict {
+  align-items: center; }
+
+.center-end {
+  justify-content: center;
+  align-items: flex-end; }
+
+.aife {
+  align-items: flex-end; }
+
+.between-center {
+  justify-content: space-between;
+  align-items: center; }
+
+.jcsb {
+  justify-content: space-between; }
+
+.end-center {
+  justify-content: flex-end;
+  align-items: center; }
+
+.between {
+  align-content: space-between; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Microsoft YaHei, Arial, Helvetica, sans-serif; }
+
+div {
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap; }
+
+.ofhi {
+  overflow: hidden; }
+
+.acct {
+  align-content: center; }
+
+.fdcl {
+  flex-direction: column; }
+
+.w100p {
+  width: 100%; }
+
+.h100p {
+  height: 100%; }
+
+.jcfe {
+  justify-content: flex-end; }
+
+.mlsm {
+  margin-left: 8px; }
+
+.mrsm {
+  margin-right: 8px; }
+
+.mtsm {
+  margin-top: 8px; }
+
+.mbsm {
+  margin-bottom: 8px; }
+
+.mlmd {
+  margin: 16px; }
+
+.mrmd {
+  margin-right: 16px; }
+
+.mtmd {
+  margin-top: 16px; }
+
+.mbmd {
+  margin-bottom: 16px; }
+
+.mllg {
+  margin: 24px; }
+
+.mrlg {
+  margin-right: 24px; }
+
+.mtlg {
+  margin-top: 24px; }
+
+.mblg {
+  margin-bottom: 24px; }
+.heart-beat-wrapper {
+  position: relative; }
+
+.heart-beat {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #e7f7f5;
+  animation: heart-beat .5s ease alternate infinite; }
+
+.heart-beat-center {
+  width: 30px;
+  height: 30px;
+  background-color: #afe4dd;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 15px; }
+
+@keyframes heart-beat {
+  from {
+    transform: scale(1); }
+  to {
+    transform: scale(3); } }
+.loading {
+  position: absolute; }
+
+.loading-hide {
+  opacity: 0;
+  transition: opacity .5s ease; }
+.return-top {
+  width: 30px;
+  height: 30px;
+  background-image: url(a3ffcb5cc84a229ff39c144db9b34c2f.png);
+  background-size: cover;
+  position: fixed;
+  bottom: 30px;
+  right: 30px; }
+
+.return-top-hide {
+  display: none; }
