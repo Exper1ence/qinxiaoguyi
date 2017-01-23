@@ -7,12 +7,13 @@ const merge = require('webpack-merge');
 const Fs = require('fs');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PATHS = {
-    entry: Path.resolve(__dirname, 'app/client'),
+    context: Path.resolve(__dirname, 'app/client'),
     bundle: Path.resolve(__dirname, 'app/public'),
+    publicPath: 'http://localhost:3000/',
 };
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 let config = {
-    context: PATHS.entry,
+    context: PATHS.context,
     entry: './index.js',
     output: {
         path: PATHS.bundle,
@@ -40,9 +41,9 @@ let config = {
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template:'template.html',
+            template: 'template.html',
         }),
-        new ExtractTextPlugin({filename: 'bundle.css', disable: false, allChunks: true})
+        new ExtractTextPlugin({filename: 'bundle.css', disable: false, allChunks: true}),
     ],
     stats: "minimal"
 };
@@ -69,17 +70,20 @@ else {
             devtool: 'source-map"',
         });
     }
-    config = Object.assign(config, {
-        devServer: {
-            contentBase: PATHS.bundle,
-            compress: true,
-            port: 3000,
-            watchOptions: {
-                poll: true
-            },
-            clientLogLevel: "none",
-            noInfo: true,
-        },
+    config = merge(config, {
+        // devServer: {
+        //     contentBase: PATHS.bundle,
+        //     compress: true,
+        //     port: 3000,
+        //     watchOptions: {
+        //         poll: true
+        //     },
+        //     clientLogLevel: "none",
+        //     noInfo: true,
+        //     historyApiFallback:{
+        //         index:'index.html'
+        //     },
+        // },
         performance: {
             hints: false
         }

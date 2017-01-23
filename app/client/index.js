@@ -16,14 +16,26 @@
 // //     require.ensure('./gakk1', () => {
 // //         // setTimeout(() => com.hide(), 2000);
 // //     })
-import './scss'
 import {render} from 'react-dom';
-import Component from './components/Component';
-// import './HeartBeat/style.scss';
-import HeartBeat from './HeartBeat';
-import Loading from './Loading';
-import QXGY from './QXGY';
+import App from './actComponents/App';
+import {h} from './components/Component';
+import {Router, Route, IndexRoute, browserHistory, hashHistory,} from 'react-router';
+import Home from './actComponents/Home';
+import About from './components/About';
+import  './components/Test';
+import Login from './actComponents/ActLogin';
+import Writing from './actComponents/ActWriting';
+import User from './actComponents/ActUser';
+import store from './actComponents/store';
 
 render((
-    <div className='full-size center-center'><QXGY/></div>
+    <Router history={browserHistory}>
+        <Route path='/' component={App}>
+            <IndexRoute component={Home}/>
+            <Route path='about' component={About}/>
+            <Route path='login' component={Login}/>
+            <Route path='writing' component={Writing}/>
+            <Route path='user' component={User}/>
+        </Route>
+    </Router>
 ), document.getElementById('qxgy'));

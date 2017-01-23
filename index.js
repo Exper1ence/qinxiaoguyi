@@ -2,7 +2,8 @@
  * Created by Exper1ence on 2017/1/2.
  */
 global.ENV = require('./ENV');
-const router = require('./router');
+const socket = require('./socket');
+require('./db')((models) => {
+    require('./app')(socket, models).start(80);
+});
 //asd
-require('./app')(router);
-router.start(ENV.debug ? 3000 : 80);

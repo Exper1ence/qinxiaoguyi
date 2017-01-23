@@ -1,0 +1,99 @@
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Microsoft YaHei, Arial, Helvetica, sans-serif;
+  color: #666;
+}
+
+div {
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.pnae{
+  position: absolute;
+}
+.pnfd{
+  position: fixed;
+}
+.jcct {
+  justify-content: center;
+}
+.jccr{
+  justify-content: center;
+}
+
+.aict {
+  align-items: center;
+}
+.aicr{
+  align-items: center;
+}
+
+.aife {
+  align-items: flex-end;
+}
+
+.jcsb {
+  justify-content: space-between;
+}
+
+.ofhi {
+  overflow: hidden;
+}
+
+.acct {
+  align-content: center;
+}
+
+.fdcn {
+  flex-direction: column;
+}
+
+.w100p {
+  width: 100%;
+}
+
+.whfp {
+  width: 100%;
+}
+
+.h100p {
+  height: 100%;
+}
+
+.jcfe {
+  justify-content: flex-end;
+}
+
+.bcrd {
+  background-color: red;
+}
+
+.fwbd {
+  font-weight: bold;
+}
+
+.fsmn {
+  font-size: 24px;
+}
+
+.fssb {
+  font-size: 20px;
+}
+
+.fssm {
+  font-size: 18px;
+}
+
+.fstt {
+  font-size: 16px;
+}
+.bcbe{
+  background-color: blue;
+}

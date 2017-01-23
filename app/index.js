@@ -3,10 +3,11 @@
  */
 const Path = require('path');
 
-module.exports = function mathRobot(router) {
-    router.static(Path.resolve(__dirname, './public'));
-    router.get(({res, req}) => {
-        res.send('不存在！');
-        console.log(req.url);
-    })
+module.exports = function mathRobot({Router, rest, start, handleStatic, maxAge, SessionStore,}, models) {
+    handleStatic(Path.resolve(__dirname, './public'));
+    return {
+        start(port){
+            start(port, require('./routes')(Object.assign({Router, rest, maxAge, SessionStore,}, models)));
+        },
+    }
 };
